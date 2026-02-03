@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ndt4/button",
+	"version": "4.0.0",
+	"title": "Button",
+	"category": "ndt4",
+	"icon": "button",
+	"description": "A button link with style and color options.",
+	"textdomain": "ndt4",
+	"attributes": {
+		"text": {
+			"type": "string",
+			"default": ""
+		},
+		"link": {
+			"type": "string",
+			"default": "#"
+		},
+		"style": {
+			"type": "string",
+			"default": "base"
+		},
+		"color": {
+			"type": "string",
+			"default": "primary"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"example": {
+		"attributes": {
+			"text": "Learn More",
+			"link": "#",
+			"style": "cta",
+			"color": "primary"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,74 @@
+/**
+ * NDT4 Customizer Panel Styles
+ *
+ * @package NDT4
+ * @since 4.0.0
+ */
+
+/* Section headers */
+.customize-control-header {
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid #ddd;
+	font-weight: 600;
+	color: #0c2340;
+}
+
+/* Help text */
+.customize-control-description {
+	font-size: 12px;
+	font-style: italic;
+	color: #666;
+	margin-bottom: 0.5rem;
+}
+
+/* Radio button groups */
+.customize-control-radio label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+/* Image controls */
+.customize-control-image .thumbnail {
+	max-width: 100%;
+	margin-bottom: 0.5rem;
+}
+
+/* Color indicators */
+.customize-control .color-indicator {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 2px;
+	margin-right: 0.5rem;
+	vertical-align: middle;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* NDT4 specific sections */
+#accordion-section-ndt4_navigation .accordion-section-title::before,
+#accordion-section-ndt4_header .accordion-section-title::before,
+#accordion-section-ndt4_footer .accordion-section-title::before,
+#accordion-section-ndt4_contact .accordion-section-title::before,
+#accordion-section-ndt4_social .accordion-section-title::before,
+#accordion-section-ndt4_content .accordion-section-title::before {
+	content: '';
+	display: inline-block;
+	width: 4px;
+	height: 100%;
+	background: #0c2340;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/* Active state */
+#accordion-section-ndt4_navigation.open .accordion-section-title,
+#accordion-section-ndt4_header.open .accordion-section-title,
+#accordion-section-ndt4_footer.open .accordion-section-title,
+#accordion-section-ndt4_contact.open .accordion-section-title,
+#accordion-section-ndt4_social.open .accordion-section-title,
+#accordion-section-ndt4_content.open .accordion-section-title {
+	background: #f8f4ec;
+}

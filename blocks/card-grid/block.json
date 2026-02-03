@@ -1,0 +1,86 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ndt4/card-grid",
+	"version": "4.0.0",
+	"title": "Card Grid",
+	"category": "ndt4",
+	"icon": "grid-view",
+	"description": "A grid layout for card components.",
+	"textdomain": "ndt4",
+	"attributes": {
+		"columns": {
+			"type": "number",
+			"default": 2
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"example": {
+		"attributes": {
+			"columns": 2
+		},
+		"innerBlocks": [
+			{
+				"name": "ndt4/card",
+				"attributes": {
+					"title": "First Card",
+					"summary": "Example card summary text."
+				}
+			},
+			{
+				"name": "ndt4/card",
+				"attributes": {
+					"title": "Second Card",
+					"summary": "Example card summary text."
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"variations": [
+		{
+			"name": "2-up",
+			"title": "Card Grid (2-Up)",
+			"description": "A 2-column card grid.",
+			"attributes": { "columns": 2 },
+			"scope": [ "inserter", "block" ],
+			"isActive": [ "columns" ],
+			"innerBlocks": [
+				[ "ndt4/card", {} ],
+				[ "ndt4/card", {} ]
+			],
+			"example": {
+				"attributes": { "columns": 2 },
+				"innerBlocks": [
+					{ "name": "ndt4/card", "attributes": { "title": "First Card", "summary": "Example card summary text." } },
+					{ "name": "ndt4/card", "attributes": { "title": "Second Card", "summary": "Example card summary text." } }
+				]
+			}
+		},
+		{
+			"name": "3-up",
+			"title": "Card Grid (3-Up)",
+			"description": "A 3-column card grid.",
+			"attributes": { "columns": 3 },
+			"scope": [ "inserter", "block" ],
+			"isActive": [ "columns" ],
+			"innerBlocks": [
+				[ "ndt4/card", {} ],
+				[ "ndt4/card", {} ],
+				[ "ndt4/card", {} ]
+			],
+			"example": {
+				"attributes": { "columns": 3 },
+				"innerBlocks": [
+					{ "name": "ndt4/card", "attributes": { "title": "First Card", "summary": "Example card summary text." } },
+					{ "name": "ndt4/card", "attributes": { "title": "Second Card", "summary": "Example card summary text." } },
+					{ "name": "ndt4/card", "attributes": { "title": "Third Card", "summary": "Example card summary text." } }
+				]
+			}
+		}
+	]
+}

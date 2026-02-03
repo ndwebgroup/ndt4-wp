@@ -1,0 +1,56 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ndt4/blockquote",
+	"version": "1.0.0",
+	"title": "Blockquote",
+	"category": "ndt4",
+	"icon": "format-quote",
+	"description": "A styled blockquote with attribution and optional image.",
+	"keywords": [ "quote", "blockquote", "testimonial", "citation" ],
+	"textdomain": "ndt4",
+	"attributes": {
+		"quote": {
+			"type": "string",
+			"default": ""
+		},
+		"authorName": {
+			"type": "string",
+			"default": ""
+		},
+		"authorTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"variant": {
+			"type": "string",
+			"default": "inline"
+		},
+		"reversed": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"example": {
+		"attributes": {
+			"quote": "As a premier Catholic research university, our research and learning drive insights, innovation, and impact for good around the world.",
+			"authorName": "Rev. Robert A. Dowd, C.S.C.",
+			"authorTitle": "President of the University of Notre Dame",
+			"variant": "inline"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

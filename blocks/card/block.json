@@ -1,0 +1,73 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ndt4/card",
+	"version": "4.0.0",
+	"title": "Card",
+	"category": "ndt4",
+	"icon": "id",
+	"description": "A flexible card component with image, title, summary, and link.",
+	"textdomain": "ndt4",
+	"attributes": {
+		"variant": {
+			"type": "string",
+			"default": "default"
+		},
+		"showImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"label": {
+			"type": "string",
+			"default": ""
+		},
+		"headingTag": {
+			"type": "string",
+			"default": "h2"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"summary": {
+			"type": "string",
+			"default": ""
+		},
+		"link": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "none"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"example": {
+		"attributes": {
+			"variant": "default",
+			"showImage": true,
+			"label": "Featured",
+			"title": "Example Card Title",
+			"summary": "This is an example card summary that demonstrates the card component layout.",
+			"link": "#"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

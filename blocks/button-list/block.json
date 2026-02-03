@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ndt4/button-list",
+	"version": "4.0.0",
+	"title": "Button List",
+	"category": "ndt4",
+	"icon": "list-view",
+	"description": "A list of button links.",
+	"textdomain": "ndt4",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false
+	},
+	"example": {
+		"innerBlocks": [
+			{
+				"name": "ndt4/button",
+				"attributes": {
+					"text": "Primary Action",
+					"style": "cta",
+					"color": "primary"
+				}
+			},
+			{
+				"name": "ndt4/button",
+				"attributes": {
+					"text": "Secondary Action",
+					"style": "base",
+					"color": "secondary"
+				}
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

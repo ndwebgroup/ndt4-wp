@@ -1,0 +1,103 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.4/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": false,
+		"useRootPaddingAwareAlignments": false,
+		"layout": {
+			"contentSize": "960px",
+			"wideSize": "1340px"
+		},
+		"color": {
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"palette": [
+				{
+					"slug": "nd-blue",
+					"color": "#0c2340",
+					"name": "ND Blue"
+				},
+				{
+					"slug": "nd-gold",
+					"color": "#c99700",
+					"name": "ND Gold"
+				},
+				{
+					"slug": "nd-metallic-gold",
+					"color": "#ae9142",
+					"name": "ND Metallic Gold"
+				},
+				{
+					"slug": "nd-green",
+					"color": "#00843d",
+					"name": "ND Green"
+				},
+				{
+					"slug": "brand-blue-bright",
+					"color": "#0033a0",
+					"name": "Brand Blue Bright"
+				},
+				{
+					"slug": "brand-blue-light",
+					"color": "#143865",
+					"name": "Brand Blue Light"
+				},
+				{
+					"slug": "warm-white",
+					"color": "#f8f4ec",
+					"name": "Warm White"
+				},
+				{
+					"slug": "white",
+					"color": "#ffffff",
+					"name": "White"
+				},
+				{
+					"slug": "gray-light",
+					"color": "#e4e1d8",
+					"name": "Gray Light"
+				},
+				{
+					"slug": "gray",
+					"color": "#8a8d8f",
+					"name": "Gray"
+				},
+				{
+					"slug": "gray-dark",
+					"color": "#4a4a4a",
+					"name": "Gray Dark"
+				},
+				{
+					"slug": "black",
+					"color": "#000000",
+					"name": "Black"
+				}
+			]
+		},
+		"typography": {
+			"customFontSize": false,
+			"dropCap": false,
+			"fontFamilies": [],
+			"fontSizes": []
+		},
+		"spacing": {
+			"customSpacingSize": false,
+			"spacingSizes": [],
+			"units": ["%"]
+		},
+		"border": {
+			"color": false,
+			"radius": false,
+			"style": false,
+			"width": false
+		},
+		"shadow": {
+			"presets": []
+		},
+		"blocks": {}
+	}
+}
