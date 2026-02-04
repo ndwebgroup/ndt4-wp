@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Theme version constant
+ * Theme version constant (pulled from style.css Version header)
  */
-define( 'NDT4_VERSION', '4.0.0' );
+define( 'NDT4_VERSION', wp_get_theme()->get( 'Version' ) );
 
 /**
  * Theme setup
@@ -358,6 +358,7 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/post-types/news.php';
 require get_template_directory() . '/inc/taxonomies/news-category.php';
+require get_template_directory() . '/inc/update-checker.php';
 
 /**
  * Register custom block category
