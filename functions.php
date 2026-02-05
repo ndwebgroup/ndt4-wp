@@ -95,9 +95,59 @@ function ndt4_theme_activation(): void {
 add_action( 'after_switch_theme', 'ndt4_theme_activation' );
 
 /**
- * Register widget areas
+ * Setup default widgets on theme activation
  *
- * Note: sidebar-nav is registered first so it receives any default widgets.
+ * Configures sidebar-nav with Recent Posts, Archives, and Categories widgets.
+ * Only runs if the sidebar has no widgets configured.
+ */
+function ndt4_setup_default_widgets(): void {
+	$sidebars_widgets = get_option( 'sidebars_widgets', [] );
+
+	// Check if sidebar-nav already has widgets configured
+	if ( ! empty( $sidebars_widgets['sidebar-nav'] ) ) {
+		return;
+	}
+
+	// Set up widget instances
+	// Recent Posts widget
+	$recent_posts = get_option( 'widget_recent-posts', [] );
+	$recent_posts[2] = [
+		'title'  => '',
+		'number' => 5,
+	];
+	update_option( 'widget_recent-posts', $recent_posts );
+
+	// Archives widget
+	$archives = get_option( 'widget_archives', [] );
+	$archives[2] = [
+		'title'    => '',
+		'count'    => 0,
+		'dropdown' => 0,
+	];
+	update_option( 'widget_archives', $archives );
+
+	// Categories widget
+	$categories = get_option( 'widget_categories', [] );
+	$categories[2] = [
+		'title'        => '',
+		'count'        => 0,
+		'hierarchical' => 0,
+		'dropdown'     => 0,
+	];
+	update_option( 'widget_categories', $categories );
+
+	// Assign widgets to sidebar
+	$sidebars_widgets['sidebar-nav'] = [
+		'recent-posts-2',
+		'archives-2',
+		'categories-2',
+	];
+	update_option( 'sidebars_widgets', $sidebars_widgets );
+}
+add_action( 'after_switch_theme', 'ndt4_setup_default_widgets' );
+
+/**
+ * Register widget areas
  */
 function ndt4_widgets_init(): void {
 	register_sidebar( [

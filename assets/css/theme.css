@@ -18,6 +18,7 @@
 	.nav-site {
 		.active > .sub-menu {display:block; }
 		.sub-menu { display:none; }
+		.page-sidebar & { margin-block-end:2rem; }
 	}
 
 	.card:has(.card-link) .card-link:after {
@@ -29,7 +30,7 @@
 		text-decoration: none;
 	} */
 
-	.widget_block { margin-block-end:1.5rem;
+	.widget_block { margin-block:1.5rem;
 		.wp-block-heading {font-size:clamp(1.325rem,0.7vw + 1rem,1.5rem); }
 	}
 
