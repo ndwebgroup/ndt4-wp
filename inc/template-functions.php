@@ -47,47 +47,6 @@ function ndt4_custom_image_sizes( array $sizes ): array {
 add_filter( 'image_size_names_choose', 'ndt4_custom_image_sizes' );
 
 /**
- * Add Open Graph meta tags.
- */
-function ndt4_open_graph_meta(): void {
-	if ( is_singular() ) {
-		global $post;
-
-		$og_title	   = get_the_title();
-		$og_description = has_excerpt() ? get_the_excerpt() : wp_trim_words( $post->post_content, 30 );
-		$og_url		 = get_permalink();
-		$og_type		= 'article';
-		$og_image	   = '';
-
-		if ( has_post_thumbnail() ) {
-			$og_image = get_the_post_thumbnail_url( null, 'large' );
-		} elseif ( get_theme_mod( 'ndt4_og_image' ) ) {
-			$og_image = get_theme_mod( 'ndt4_og_image' );
-		}
-
-		echo '<meta property="og:title" content="' . esc_attr( $og_title ) . '">' . "\n";
-		echo '<meta property="og:description" content="' . esc_attr( $og_description ) . '">' . "\n";
-		echo '<meta property="og:url" content="' . esc_url( $og_url ) . '">' . "\n";
-		echo '<meta property="og:type" content="' . esc_attr( $og_type ) . '">' . "\n";
-		echo '<meta property="og:site_name" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
-
-		if ( $og_image ) {
-			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
-		}
-
-		// Twitter Card.
-		echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
-		echo '<meta name="twitter:title" content="' . esc_attr( $og_title ) . '">' . "\n";
-		echo '<meta name="twitter:description" content="' . esc_attr( $og_description ) . '">' . "\n";
-
-		if ( $og_image ) {
-			echo '<meta name="twitter:image" content="' . esc_url( $og_image ) . '">' . "\n";
-		}
-	}
-}
-add_action( 'wp_head', 'ndt4_open_graph_meta', 5 );
-
-/**
  * Modify the archive title.
  *
  * @param string $title Archive title.
