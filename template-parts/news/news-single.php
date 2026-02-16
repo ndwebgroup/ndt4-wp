@@ -12,7 +12,7 @@
 	<header class="entry-header">
 		<?php ndt4_breadcrumbs(); ?>
 
-		<div class="entry-meta">
+		<div class="meta entry-meta">
 			<time class="entry-date" datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 				<?php echo esc_html( get_the_date() ); ?>
 			</time>

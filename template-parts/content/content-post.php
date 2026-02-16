@@ -20,7 +20,7 @@
 
 		if ( 'post' === get_post_type() ) :
 			?>
-			<div class="entry-meta">
+			<div class="meta entry-meta">
 				<?php
 				ndt4_posted_on();
 				ndt4_posted_by();

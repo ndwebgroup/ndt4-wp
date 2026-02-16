@@ -47,8 +47,8 @@ if ( $topnav ) {
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry' ); ?>>
 					<header class="entry-header">
-						<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-						<div class="entry-meta">
+						<?php the_title( sprintf( '<h2 class="entry-title search-result-title"><a href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+						<div class="meta entry-meta search-result-meta">
 							<?php ndt4_posted_on(); ?>
 						</div>
 					</header>

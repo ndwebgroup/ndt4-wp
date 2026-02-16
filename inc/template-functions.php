@@ -298,6 +298,7 @@ class NDT4_Top_Nav_Walker extends Walker_Nav_Menu {
 
 		// Add aria-current for current page.
 		if ( in_array( 'current-menu-item', $classes, true ) ) {
+			$atts['class'] = 'current';
 			$atts['aria-current'] = 'page';
 		}
 
@@ -393,6 +394,7 @@ class NDT4_Side_Nav_Walker extends Walker_Nav_Menu {
 
 		// Add aria-current for current page.
 		if ( in_array( 'current-menu-item', $classes, true ) ) {
+			$atts['class'] = 'current';
 			$atts['aria-current'] = 'page';
 		}
 
