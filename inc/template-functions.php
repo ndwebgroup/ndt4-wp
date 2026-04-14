@@ -24,7 +24,7 @@ add_action( 'wp_head', 'ndt4_pingback_header' );
 function ndt4_add_image_sizes(): void {
 	add_image_size( 'ndt4-hero', 1340, 600, true );
 	add_image_size( 'ndt4-card', 400, 300, true );
-	add_image_size( 'ndt4-news-thumb', 300, 200, true );
+	add_image_size( 'ndt4-list-thumb', 300, 200, true );
 }
 add_action( 'after_setup_theme', 'ndt4_add_image_sizes' );
 
@@ -40,7 +40,7 @@ function ndt4_custom_image_sizes( array $sizes ): array {
 		[
 			'ndt4-hero'	   => __( 'Hero Image', 'ndt4' ),
 			'ndt4-card'	   => __( 'Card Image', 'ndt4' ),
-			'ndt4-news-thumb' => __( 'News Thumbnail', 'ndt4' ),
+			'ndt4-list-thumb' => __( 'List Thumbnail', 'ndt4' ),
 		]
 	);
 }
@@ -68,10 +68,6 @@ function ndt4_archive_title( string $title ): string {
 	} elseif ( is_day() ) {
 		/* translators: %s: date */
 		$title = sprintf( __( 'Day: %s', 'ndt4' ), get_the_date() );
-	} elseif ( is_post_type_archive( 'ndt4_news' ) ) {
-		$title = __( 'News', 'ndt4' );
-	} elseif ( is_tax( 'ndt4_news_category' ) ) {
-		$title = single_term_title( '', false );
 	}
 
 	return $title;

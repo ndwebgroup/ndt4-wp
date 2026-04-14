@@ -316,21 +316,6 @@ function ndt4_is_full_width(): bool {
 }
 
 /**
- * Get latest news posts
- *
- * @param int $count Number of posts to retrieve.
- * @return WP_Query
- */
-function ndt4_get_latest_news( int $count = 3 ): WP_Query {
-	return new WP_Query( [
-		'post_type'	  => 'ndt4_news',
-		'posts_per_page' => $count,
-		'orderby'		=> 'date',
-		'order'		  => 'DESC',
-	] );
-}
-
-/**
  * Add body classes
  *
  * Note: nav-top--true/nav-top--false classes are added directly in header.php
@@ -382,8 +367,6 @@ add_filter( 'post_class', 'ndt4_post_classes' );
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
-require get_template_directory() . '/inc/post-types/news.php';
-require get_template_directory() . '/inc/taxonomies/news-category.php';
 require get_template_directory() . '/inc/update-checker.php';
 
 /**
@@ -440,10 +423,6 @@ function ndt4_register_block_pattern_categories(): void {
 
 	register_block_pattern_category( 'ndt4-cta', [
 		'label' => __( 'NDT4 Call to Action', 'ndt4' ),
-	] );
-
-	register_block_pattern_category( 'ndt4-news', [
-		'label' => __( 'NDT4 News', 'ndt4' ),
 	] );
 }
 add_action( 'init', 'ndt4_register_block_pattern_categories' );

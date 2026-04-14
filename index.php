@@ -39,7 +39,7 @@ get_header();
 					<?php if ( has_post_thumbnail() ) : ?>
 						<figure class="entry-thumbnail card-image entry-image">
 							<a href="<?php the_permalink(); ?>">
-								<?php the_post_thumbnail( 'ndt4-news-thumb' ); ?>
+								<?php the_post_thumbnail( 'ndt4-list-thumb' ); ?>
 							</a>
 						</figure>
 					<?php endif; ?>

@@ -149,21 +149,6 @@ if ( ! function_exists( 'ndt4_entry_footer' ) ) :
 			}
 		}
 
-		if ( 'ndt4_news' === get_post_type() ) {
-			$terms = get_the_terms( get_the_ID(), 'ndt4_news_category' );
-			if ( $terms && ! is_wp_error( $terms ) ) {
-				$term_links = [];
-				foreach ( $terms as $term ) {
-					$term_links[] = '<a href="' . esc_url( get_term_link( $term ) ) . '">' . esc_html( $term->name ) . '</a>';
-				}
-				printf(
-					'<li class="cat-links">%s %s</li>',
-					esc_html__( 'Filed under:', 'ndt4' ),
-					implode( ', ', $term_links ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				);
-			}
-		}
-
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<li class="comments-link">';
 			comments_popup_link(
@@ -278,15 +263,7 @@ if ( ! function_exists( 'ndt4_breadcrumbs' ) ) :
 			echo '</li>';
 
 		} elseif ( is_single() ) {
-			if ( 'ndt4_news' === get_post_type() ) {
-				echo '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-				echo '<a itemprop="item" href="' . esc_url( get_post_type_archive_link( 'ndt4_news' ) ) . '">';
-				echo '<span itemprop="name">' . esc_html__( 'News', 'ndt4' ) . '</span>';
-				echo '</a>';
-				echo '<meta itemprop="position" content="' . esc_attr( $position ) . '" />';
-				echo '</li>';
-				$position++;
-			} elseif ( 'post' === get_post_type() ) {
+			if ( 'post' === get_post_type() ) {
 				$categories = get_the_category();
 				if ( ! empty( $categories ) ) {
 					echo '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';

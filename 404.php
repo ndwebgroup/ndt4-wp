@@ -45,14 +45,22 @@ get_header();
 		<li><?php esc_html_e( 'If you reached this page using a bookmark, the page you\'re looking for may have moved.', 'ndt4' ); ?></li>
 	</ul>
 
-	<?php if ( ndt4_get_latest_news( 5 )->have_posts() ) : ?>
-		<div class="widget widget-recent-news">
-			<h2 class="widget-title"><?php esc_html_e( 'Recent News', 'ndt4' ); ?></h2>
+	<?php
+	$recent_posts = new WP_Query( [
+		'post_type'      => 'post',
+		'posts_per_page' => 5,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'no_found_rows'  => true,
+	] );
+	if ( $recent_posts->have_posts() ) :
+		?>
+		<div class="widget widget-recent-posts">
+			<h2 class="widget-title"><?php esc_html_e( 'Recent Posts', 'ndt4' ); ?></h2>
 			<ul>
 				<?php
-				$recent_news = ndt4_get_latest_news( 5 );
-				while ( $recent_news->have_posts() ) :
-					$recent_news->the_post();
+				while ( $recent_posts->have_posts() ) :
+					$recent_posts->the_post();
 					?>
 					<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 				<?php endwhile; ?>

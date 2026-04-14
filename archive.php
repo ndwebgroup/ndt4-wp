@@ -44,10 +44,10 @@ get_header();
 					</div>
 				</header>
 
-				<?php if ( has_post_thumbnail() && get_theme_mod( 'ndt4_show_news_images', true ) ) : ?>
+				<?php if ( has_post_thumbnail() ) : ?>
 					<figure class="entry-thumbnail">
 						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail( 'ndt4-news-thumb' ); ?>
+							<?php the_post_thumbnail( 'ndt4-list-thumb' ); ?>
 						</a>
 					</figure>
 				<?php endif; ?>

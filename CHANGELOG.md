@@ -2,6 +2,9 @@
 
 ## [1.0.2] - 2026-04-14
 
+- REMOVE: News CPT (`ndt4_news`), News Category taxonomy (`ndt4_news_category`), and all related templates, template parts, customizer setting, pattern, and pattern category. Themes shouldn't define content types — switching themes orphans CPT content. Sites that need a "News" stream should use built-in Posts (rename the menu label if desired) or a companion plugin.
+- CHANGE: `ndt4-news-thumb` image size renamed to `ndt4-list-thumb` (now used by generic post lists in `index.php` / `archive.php`)
+- CHANGE: 404 page's "Recent News" widget now shows recent Posts
 - FIX: CPT singles (e.g. an individual event) now mark the menu item pointing at the CPT archive as `current-menu-ancestor` so the parent nav item highlights correctly
 - FIX: Posts page menu item no longer falsely flagged as the active parent on CPT archives, CPT singles, and custom-taxonomy archives
 - FIX: Suppress Conductor's auto-detected external-link icon on links that aren't explicitly marked external (`target="_blank"`, `rel="external"`, or `.external-link`); avoids false positives on absolute internal URLs emitted by WordPress and plugins

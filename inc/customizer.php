@@ -410,25 +410,6 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		]
 	);
 
-	// Show News Images.
-	$wp_customize->add_setting(
-		'ndt4_news_images',
-		[
-			'default'		   => true,
-			'sanitize_callback' => 'ndt4_sanitize_checkbox',
-			'transport'		 => 'refresh',
-		]
-	);
-
-	$wp_customize->add_control(
-		'ndt4_news_images',
-		[
-			'label'   => __( 'Show Images in News Lists', 'ndt4' ),
-			'section' => 'ndt4_content',
-			'type'	=> 'checkbox',
-		]
-	);
-
 	// Back to Top Button.
 	$wp_customize->add_setting(
 		'ndt4_back_to_top',
