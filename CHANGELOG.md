@@ -2,6 +2,9 @@
 
 ## [1.0.2] - 2026-04-14
 
+- FIX: CPT singles (e.g. an individual event) now mark the menu item pointing at the CPT archive as `current-menu-ancestor` so the parent nav item highlights correctly
+- FIX: Posts page menu item no longer falsely flagged as the active parent on CPT archives, CPT singles, and custom-taxonomy archives
+- FIX: Suppress Conductor's auto-detected external-link icon on links that aren't explicitly marked external (`target="_blank"`, `rel="external"`, or `.external-link`); avoids false positives on absolute internal URLs emitted by WordPress and plugins
 - NEW: Plugin-agnostic layout shell — `.page-primary` wrapper now lives in `header.php`/`footer.php`; theme templates inject `.page-header`/`.page-sidebar` via `ndt4_before_main_content`/`ndt4_after_main_content` hooks
 - NEW: `ndt4_register_layout()` helper for templates to declare header/sidebar callbacks and primary class modifiers in one call
 - NEW: Blockquote block — `imageAlt` attribute with editor field; alt text auto-seeds from media library and falls back to author name

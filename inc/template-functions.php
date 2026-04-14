@@ -238,6 +238,113 @@ function ndt4_page_has_children( int $page_id ): bool {
 }
 
 /**
+ * Strip the false-positive `current_page_parent` class WordPress adds
+ * to the assigned "Posts page" menu item on every non-`post` archive
+ * or single (CPT singles, CPT archives, CPT taxonomy archives).
+ *
+ * Hooks `wp_nav_menu_objects` (not `nav_menu_css_class`) so the
+ * cleaned classes are visible to the walker's active-state check,
+ * which reads `$item->classes` directly before the css-class filter
+ * is applied.
+ *
+ * @param array $items Menu items for the current menu.
+ * @return array Filtered menu items.
+ */
+function ndt4_strip_posts_page_parent_class( array $items ): array {
+	$posts_page_id = (int) get_option( 'page_for_posts' );
+	if ( ! $posts_page_id ) {
+		return $items;
+	}
+
+	$on_cpt_view = ( is_singular() && ! is_singular( 'post' ) && ! is_page() )
+		|| ( is_post_type_archive() && ! is_post_type_archive( 'post' ) )
+		|| is_tax();
+
+	if ( ! $on_cpt_view ) {
+		return $items;
+	}
+
+	$strip = [
+		'current_page_parent',
+		'current-page-parent',
+		'current-menu-parent',
+		'current_page_ancestor',
+		'current-page-ancestor',
+	];
+
+	foreach ( $items as $item ) {
+		if ( 'page' === $item->object && (int) $item->object_id === $posts_page_id ) {
+			$item->classes = array_values( array_diff( (array) $item->classes, $strip ) );
+		}
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'ndt4_strip_posts_page_parent_class' );
+
+/**
+ * Mark a menu item pointing at a CPT archive as `current-menu-ancestor`
+ * when viewing a single of that CPT or a custom-taxonomy archive that
+ * belongs to the CPT.
+ *
+ * WordPress auto-marks menu items only when the request URL matches the
+ * item's URL (so the archive itself works) and walks the page hierarchy
+ * for pages. Plain CPT singles get no automatic ancestor highlighting,
+ * which leaves the parent menu item un-styled.
+ *
+ * @param array $items Menu items for the current menu.
+ * @return array Filtered menu items.
+ */
+function ndt4_mark_cpt_archive_menu_ancestor( array $items ): array {
+	$post_type = false;
+
+	if ( is_singular() && ! is_singular( 'post' ) && ! is_page() ) {
+		$post_type = get_post_type();
+	} elseif ( is_tax() ) {
+		$term = get_queried_object();
+		if ( $term && isset( $term->taxonomy ) ) {
+			$tax = get_taxonomy( $term->taxonomy );
+			if ( $tax && ! empty( $tax->object_type ) ) {
+				$post_type = reset( $tax->object_type );
+			}
+		}
+	}
+
+	if ( ! $post_type || in_array( $post_type, [ 'post', 'page' ], true ) ) {
+		return $items;
+	}
+
+	$archive_url = get_post_type_archive_link( $post_type );
+	if ( ! $archive_url ) {
+		return $items;
+	}
+
+	$archive_path = untrailingslashit( (string) wp_parse_url( $archive_url, PHP_URL_PATH ) );
+	if ( '' === $archive_path ) {
+		return $items;
+	}
+
+	foreach ( $items as $item ) {
+		if ( empty( $item->url ) ) {
+			continue;
+		}
+		$item_path = untrailingslashit( (string) wp_parse_url( $item->url, PHP_URL_PATH ) );
+		if ( '' === $item_path || $item_path !== $archive_path ) {
+			continue;
+		}
+
+		$classes = (array) $item->classes;
+		if ( ! in_array( 'current-menu-ancestor', $classes, true ) ) {
+			$classes[] = 'current-menu-ancestor';
+		}
+		$item->classes = array_values( $classes );
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'ndt4_mark_cpt_archive_menu_ancestor' );
+
+/**
  * Custom walker for top navigation (removes submenus, adds home icon)
  */
 class NDT4_Top_Nav_Walker extends Walker_Nav_Menu {

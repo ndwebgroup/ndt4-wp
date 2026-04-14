@@ -15,6 +15,16 @@
 	.breadcrumbs [href^=http]:after,
 	.entry-title [href^=http]:after { background-image:none; }
 
+	/* Suppress Conductor's auto-detected external-link icon on links that
+	   aren't explicitly marked external. WordPress and many plugins emit
+	   absolute URLs for internal links, which Conductor's `[href^=http]`
+	   selectors would otherwise flag. The `.external-link` class plus
+	   `target=_blank` / `rel=external` opt back in. */
+	.btn[href^=http]:not([target=_blank]):not([rel~=external]):not(.external-link):after,
+	.site-content [href^=http]:not([target=_blank]):not([rel~=external]):not(.external-link):after {
+		background-image: none;
+	}
+
 	.nav-site {
 		.active > .sub-menu {display:block; }
 		.sub-menu { display:none; }
