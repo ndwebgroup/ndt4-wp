@@ -2,6 +2,7 @@
 
 ## [1.0.2] - 2026-04-14
 
+- NEW: Plugin dark-mode opt-out — popular plugins (The Events Calendar, WooCommerce, Contact Form 7, Gravity Forms, WPForms, Ninja Forms, MailChimp, bbPress, BuddyPress, Elementor, LearnDash, EDD, Smash Balloon, Beaver Builder, Jetpack Forms, WP Recipe Maker, TablePress) now render against a white panel with `color-scheme: light` when the site is in dark mode, since most plugins don't honor light/dark themes
 - REMOVE: News CPT (`ndt4_news`), News Category taxonomy (`ndt4_news_category`), and all related templates, template parts, customizer setting, pattern, and pattern category. Themes shouldn't define content types — switching themes orphans CPT content. Sites that need a "News" stream should use built-in Posts (rename the menu label if desired) or a companion plugin.
 - CHANGE: `ndt4-news-thumb` image size renamed to `ndt4-list-thumb` (now used by generic post lists in `index.php` / `archive.php`)
 - CHANGE: 404 page's "Recent News" widget now shows recent Posts

@@ -50,6 +50,53 @@
 }
 
 /* ==========================================================================
+   Plugin dark-mode opt-out
+   ==========================================================================
+   Force plugin-owned regions back to a light color scheme when the site is
+   in dark mode. Most plugins don't honor light/dark themes and become
+   unreadable against Conductor's dark background.
+
+   IMPORTANT: This rule MUST stay unlayered. CSS cascade layers spec: any
+   unlayered style beats any layered style regardless of specificity. Plugin
+   stylesheets are unlayered, so a layered override would lose to plugin
+   rules like `.tribe-events-view { background-color: var(--tec-...) }`.
+
+   Extend the selector list when you encounter another misbehaving plugin. */
+[data-theme="dark"] :is(
+	.bbp-template-notice,
+	.buddypress-wrap,
+	.cff-wrapper,
+	.edd_download,
+	.edd_downloads_list,
+	.elementor,
+	.fl-builder-content,
+	.gform_widget,
+	.gform_wrapper,
+	.ld-content,
+	.learndash,
+	.mc4wp-form,
+	.nf-form-cont,
+	.sb_instagram_header,
+	.tablepress,
+	.tribe-common,
+	.tribe-events-view,
+	.tribe-events,
+	.tribe-events-pg-template,
+	.woocommerce-page,
+	.woocommerce,
+	.wp-block-jetpack-contact-form,
+	.wpcf7,
+	.wpforms-container,
+	.wprm-recipe-container,
+	#bbpress-forums,
+	#sb_instagram,
+	#tribe-events
+) {
+	color-scheme: light;
+	background-color: #fff;
+}
+
+/* ==========================================================================
    WordPress Global Styles - Override conflicting defaults
    ========================================================================== */
 a:where(:not(.wp-element-button)) {
