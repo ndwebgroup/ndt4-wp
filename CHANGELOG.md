@@ -2,6 +2,11 @@
 
 ## [1.0.2] - 2026-04-14
 
+- NEW: Single post template now emits schema-rich `NewsArticle` markup — outer `<article typeof="NewsArticle">` spans header/primary/footer/sidebar, with `property="headline"`, `datePublished`, author, `image`, `dateModified`, publisher, `mainEntityOfPage`, and a `.page-secondary.article-footer` share block between `.page-primary` and `.page-sidebar`
+- NEW: Posts page (`index.php`) listing cards include a `.article-meta` block with `datePublished`, linked author, image, `dateModified`, and publisher schema between the card title and excerpt; `typeof="Article"` on the listing wrapper
+- NEW: `ndt4_register_layout()` now accepts `primary_attrs` (associative array) which flows through a new `ndt4_page_primary_attrs` filter rendered by `header.php`; used by single posts to add `property="mainEntityOfPage"` directly to `.page-primary`
+- NEW: `.article-page-wrapper { display: contents }` keeps the outer `<article>` semantic without breaking Conductor's grid, which operates on direct children of `.site-content`
+- NEW: Post navigation and comment consent label style tweaks
 - NEW: Plugin dark-mode opt-out — popular plugins (The Events Calendar, WooCommerce, Contact Form 7, Gravity Forms, WPForms, Ninja Forms, MailChimp, bbPress, BuddyPress, Elementor, LearnDash, EDD, Smash Balloon, Beaver Builder, Jetpack Forms, WP Recipe Maker, TablePress) now render against a white panel with `color-scheme: light` when the site is in dark mode, since most plugins don't honor light/dark themes
 - REMOVE: News CPT (`ndt4_news`), News Category taxonomy (`ndt4_news_category`), and all related templates, template parts, customizer setting, pattern, and pattern category. Themes shouldn't define content types — switching themes orphans CPT content. Sites that need a "News" stream should use built-in Posts (rename the menu label if desired) or a companion plugin.
 - CHANGE: `ndt4-news-thumb` image size renamed to `ndt4-list-thumb` (now used by generic post lists in `index.php` / `archive.php`)

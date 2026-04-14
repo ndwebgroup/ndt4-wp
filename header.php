@@ -164,5 +164,18 @@ if ( ! ndt4_layout_has_sidebar() && false === strpos( $ndt4_primary_modifiers, '
 	$ndt4_primary_modifiers = trim( $ndt4_primary_modifiers . ' block-center' );
 }
 $ndt4_primary_classes = trim( 'page-primary ' . $ndt4_primary_modifiers );
+
+/**
+ * Filter additional HTML attributes for the main `.page-primary` wrapper.
+ *
+ * Templates use `ndt4_register_layout( ['primary_attrs' => [...]] )` to
+ * add things like `property="mainEntityOfPage"` for schema markup.
+ * Returns an associative array keyed by attribute name.
+ */
+$ndt4_primary_attrs     = (array) apply_filters( 'ndt4_page_primary_attrs', [] );
+$ndt4_primary_attr_html = '';
+foreach ( $ndt4_primary_attrs as $name => $value ) {
+	$ndt4_primary_attr_html .= ' ' . esc_attr( (string) $name ) . '="' . esc_attr( (string) $value ) . '"';
+}
 ?>
-<div class="<?php echo esc_attr( $ndt4_primary_classes ); ?>">
+<div class="<?php echo esc_attr( $ndt4_primary_classes ); ?>"<?php echo $ndt4_primary_attr_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attr names and values escaped above. ?>>

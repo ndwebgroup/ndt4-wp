@@ -34,7 +34,7 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry' ); ?>>
+			<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry article' ); ?> typeof="Article">
 				<div class="card card--news">
 					<?php if ( has_post_thumbnail() ) : ?>
 						<figure class="entry-thumbnail card-image entry-image">
@@ -45,9 +45,28 @@ get_header();
 					<?php endif; ?>
 
 					<div class="card-body">
-						<?php the_title( sprintf( '<h2 class="entry-title article-title card-title"><a class="card-link" href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+						<?php the_title( sprintf( '<h2 property="headline" class="entry-title article-title card-title"><a class="card-link" href="%s">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-						<div class="entry-summary article-excerpt">
+						<div class="article-meta">
+							<p class="meta-item publish-info">
+								<time property="datePublished" class="published" datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
+									<span class="visually-hidden"><?php esc_html_e( 'Published:', 'ndt4' ); ?></span> <?php echo esc_html( get_the_date() ); ?>
+								</time>
+							</p>
+							<?php if ( get_the_author() ) : ?>
+								<p class="meta-item author" property="author" typeof="Person">
+									<?php esc_html_e( 'Author:', 'ndt4' ); ?>
+									<a href="<?php echo esc_url( get_author_posts_url( (int) get_the_author_meta( 'ID' ) ) ); ?>"><?php echo esc_html( get_the_author() ); ?></a>
+								</p>
+							<?php endif; ?>
+							<?php if ( has_post_thumbnail() ) : ?>
+								<meta property="image" content="<?php echo esc_url( (string) get_the_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>">
+							<?php endif; ?>
+							<meta property="dateModified" content="<?php echo esc_attr( get_the_modified_date( DATE_W3C ) ); ?>">
+							<link property="publisher" resource="#siteorg">
+						</div>
+
+						<div property="description" class="entry-summary article-excerpt">
 							<?php the_excerpt(); ?>
 						</div>
 					</div>

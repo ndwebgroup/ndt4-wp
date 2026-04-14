@@ -47,6 +47,36 @@
 	@media only screen and (min-width: 30em) {
     figure.alignleft, figure.alignright { max-width:46%; }
 	}
+
+	.post-navigation {
+		margin-block-end:2rem;
+		border: 1px solid #e4e1d8;
+		border-width: 1px 0;
+		padding-block: 1rem;
+		.nav-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+
+	.comment-form-cookies-consent {
+		label { display: inline; font-weight: 400; }
+	}
+}
+
+/* ==========================================================================
+   Single-post article wrapper
+   ==========================================================================
+   single.php wraps .page-header, .page-primary, .page-secondary, and
+   .page-sidebar in a single <article typeof="NewsArticle"> for schema
+   purposes. Conductor's grid lives on .site-content and expects those
+   elements as direct children, so make the article transparent to
+   layout while keeping it in the DOM. */
+.article-page-wrapper {
+	display: contents;
 }
 
 /* ==========================================================================

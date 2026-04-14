@@ -44,6 +44,16 @@ if ( ! function_exists( 'ndt4_register_layout' ) ) :
 				}
 			);
 		}
+
+		if ( ! empty( $args['primary_attrs'] ) && is_array( $args['primary_attrs'] ) ) {
+			$extra_attrs = $args['primary_attrs'];
+			add_filter(
+				'ndt4_page_primary_attrs',
+				static function ( array $attrs ) use ( $extra_attrs ): array {
+					return array_merge( $attrs, $extra_attrs );
+				}
+			);
+		}
 	}
 endif;
 
