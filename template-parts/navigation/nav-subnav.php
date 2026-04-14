@@ -35,7 +35,6 @@ if ( $current_id === $section_id ) {
 } elseif ( in_array( $section_id, get_post_ancestors( $current_id ), true ) ) {
 	$root_classes[] = 'active';
 }
-$root_aria = ( $current_id === $section_id ) ? ' aria-current="page"' : '';
 ?>
 <nav id="nav" class="nav-site nav-section mbe-3" aria-label="<?php echo esc_attr( $section_title ); ?> <?php esc_attr_e( 'section navigation', 'ndt4' ); ?>">
 	<ul class="menu">

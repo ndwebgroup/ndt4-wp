@@ -154,7 +154,7 @@ function ndt4_schema_org_footer(): void {
 	$social_urls = [];
 	$networks	= [ 'facebook', 'twitter', 'instagram', 'youtube', 'linkedin' ];
 	foreach ( $networks as $network ) {
-		$url = get_theme_mod( 'ndt4_social_' . $network, '' );
+		$url = esc_url_raw( (string) get_theme_mod( 'ndt4_social_' . $network, '' ) );
 		if ( $url ) {
 			$social_urls[] = $url;
 		}
@@ -367,8 +367,17 @@ class NDT4_Side_Nav_Walker extends Walker_Nav_Menu {
 		$classes   = empty( $item->classes ) ? [] : (array) $item->classes;
 		$classes[] = 'menu-item-' . $item->ID;
 
-		// Add 'active' for current page or ancestor.
-		$active_classes = [ 'current-menu-item', 'current-menu-ancestor', 'current_page_item', 'current_page_ancestor' ];
+		// Add 'active' for current page or ancestor/parent.
+		$active_classes = [
+			'current-menu-item',
+			'current_page_item',
+			'current-page-ancestor',
+			'current-menu-ancestor',
+			'current-menu-parent',
+			'current-page-parent',
+			'current_page_parent',
+			'current_page_ancestor',
+		];
 		if ( array_intersect( $active_classes, $classes ) ) {
 			$classes[] = 'active';
 		}

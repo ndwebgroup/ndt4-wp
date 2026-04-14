@@ -8,6 +8,77 @@
 
 declare(strict_types=1);
 
+if ( ! function_exists( 'ndt4_register_layout' ) ) :
+	/**
+	 * Register layout callbacks for the main content area.
+	 *
+	 * Theme templates call this BEFORE get_header() to inject
+	 * `.page-header` / `.page-sidebar` siblings around the
+	 * `.page-primary` wrapper that header.php / footer.php provide,
+	 * and to set modifier classes on `.page-primary` itself.
+	 *
+	 * Plugin templates skip this and render into the default
+	 * single-column `.page-primary` wrapper automatically.
+	 *
+	 * @param array{
+	 *     page_header?: callable|null,
+	 *     page_sidebar?: callable|null,
+	 *     primary_classes?: string,
+	 * } $args Layout arguments.
+	 */
+	function ndt4_register_layout( array $args ): void {
+		if ( ! empty( $args['page_header'] ) && is_callable( $args['page_header'] ) ) {
+			add_action( 'ndt4_before_main_content', $args['page_header'] );
+		}
+
+		if ( ! empty( $args['page_sidebar'] ) && is_callable( $args['page_sidebar'] ) ) {
+			add_action( 'ndt4_after_main_content', $args['page_sidebar'] );
+		}
+
+		if ( ! empty( $args['primary_classes'] ) ) {
+			$extra = (string) $args['primary_classes'];
+			add_filter(
+				'ndt4_page_primary_classes',
+				static function ( string $classes ) use ( $extra ): string {
+					return trim( $classes . ' ' . $extra );
+				}
+			);
+		}
+	}
+endif;
+
+if ( ! function_exists( 'ndt4_layout_has_sidebar' ) ) :
+	/**
+	 * Whether the current request will render a `.page-sidebar`.
+	 *
+	 * True when any callback is attached to `ndt4_after_main_content`.
+	 * Templates register the sidebar callback before get_header() runs,
+	 * so this is reliable from the body_class filter onward.
+	 */
+	function ndt4_layout_has_sidebar(): bool {
+		return (bool) has_action( 'ndt4_after_main_content' );
+	}
+endif;
+
+if ( ! function_exists( 'ndt4_render_nav_sidebar' ) ) :
+	/**
+	 * Render the standard page sidebar (nav + widgets).
+	 *
+	 * @param string $nav_part Template part slug under template-parts/navigation/.
+	 *                         Defaults to 'nav-site'.
+	 */
+	function ndt4_render_nav_sidebar( string $nav_part = 'nav-site' ): void {
+		?>
+		<div class="page-sidebar">
+			<?php
+			get_template_part( 'template-parts/navigation/' . $nav_part );
+			dynamic_sidebar( 'sidebar-nav' );
+			?>
+		</div>
+		<?php
+	}
+endif;
+
 if ( ! function_exists( 'ndt4_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.

@@ -11,7 +11,7 @@
  */
 
 $text  = $attributes['text'] ?? '';
-$link  = $attributes['link'] ?? '#';
+$link  = $attributes['link'] ?? '';
 $style = $attributes['style'] ?? 'base';
 $color = $attributes['color'] ?? 'primary';
 

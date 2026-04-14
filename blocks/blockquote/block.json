@@ -30,6 +30,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
 		"variant": {
 			"type": "string",
 			"default": "inline"

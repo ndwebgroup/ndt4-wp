@@ -36,7 +36,8 @@ switch ( $variant ) {
 		break;
 }
 
-if ( 'none' !== $bg_color && $bg_color ) {
+$allowed_bg = [ 'sky-blue-light', 'brand-blue', 'green-spring', 'gold', 'warm-white' ];
+if ( in_array( $bg_color, $allowed_bg, true ) ) {
 	$card_classes .= ' bg--' . $bg_color;
 }
 

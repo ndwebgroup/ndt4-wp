@@ -16,6 +16,6 @@ if ( empty( $block->inner_blocks ) ) {
 ?>
 <ul class="no-bullets btn-list">
 	<?php foreach ( $block->inner_blocks as $inner_block ) : ?>
-		<li><?php echo $inner_block->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></li>
+		<li><?php echo $inner_block->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner block render() handles its own escaping. ?></li>
 	<?php endforeach; ?>
 </ul>

@@ -209,16 +209,6 @@ function ndt4_scripts(): void {
 		NDT4_VERSION
 	);
 
-	// Conditional animation CSS
-	if ( get_theme_mod( 'ndt4_animate', false ) ) {
-		wp_enqueue_style(
-			'ndt4-animate',
-			get_template_directory_uri() . '/assets/css/animate.css',
-			[ 'ndt4-theme' ],
-			NDT4_VERSION
-		);
-	}
-
 	// External Conductor framework JS
 	wp_enqueue_script(
 		'ndt-framework',
@@ -248,9 +238,7 @@ function ndt4_scripts(): void {
 
 	// Localize script with theme data
 	wp_localize_script( 'ndt4-theme', 'ndt4Data', [
-		'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-		'nonce'	 => wp_create_nonce( 'ndt4-nonce' ),
-		'navStyle'  => ndt4_get_navigation_style(),
+		'navStyle' => ndt4_get_navigation_style(),
 	] );
 
 	// Comment reply script
@@ -360,25 +348,9 @@ function ndt4_body_classes( array $classes ): array {
 		$classes[] = 'full-width';
 	}
 
-	// Add page--full-width when using full-width template
-	if ( is_page_template( 'templates/template-full-width.php' ) ) {
-		$classes[] = 'page--full-width';
-	} elseif ( is_page() ) {
-		// Add page--full-width when page has no sidebar
-		$nav_style    = ndt4_get_navigation_style();
-		$topnav       = ( 'top' === $nav_style );
-		$is_top_level = ! wp_get_post_parent_id( get_the_ID() );
-		$has_children = ndt4_page_has_children( get_the_ID() );
-		$has_subnav   = ! $is_top_level || $has_children;
-		$has_sidebar  = ! $topnav || $has_subnav;
-
-		if ( ! $has_sidebar ) {
-			$classes[] = 'page--full-width';
-		}
-	}
-
-	// Add page--full-width for search results
-	if ( is_search() ) {
+	// Whenever the active template/plugin renders no `.page-sidebar`,
+	// flag the body so Conductor's full-width layout engages.
+	if ( ! ndt4_layout_has_sidebar() ) {
 		$classes[] = 'page--full-width';
 	}
 

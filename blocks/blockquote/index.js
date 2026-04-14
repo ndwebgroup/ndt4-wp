@@ -9,6 +9,7 @@
 	var PanelBody = wp.components.PanelBody;
 	var SelectControl = wp.components.SelectControl;
 	var ToggleControl = wp.components.ToggleControl;
+	var TextControl = wp.components.TextControl;
 	var Button = wp.components.Button;
 	var __ = wp.i18n.__;
 
@@ -39,6 +40,7 @@
 				setAttributes( {
 					imageId: media.id,
 					imageUrl: media.url,
+					imageAlt: media.alt || attributes.imageAlt || '',
 				} );
 			};
 
@@ -46,6 +48,7 @@
 				setAttributes( {
 					imageId: 0,
 					imageUrl: '',
+					imageAlt: '',
 				} );
 			};
 
@@ -57,7 +60,7 @@
 							attributes.imageUrl
 								? el( 'img', {
 									src: attributes.imageUrl,
-									alt: attributes.authorName || '',
+									alt: attributes.imageAlt || attributes.authorName || '',
 								} )
 								: el( MediaUploadCheck, null,
 									el( MediaUpload, {
@@ -127,7 +130,7 @@
 							attributes.imageUrl
 								? el( 'img', {
 									src: attributes.imageUrl,
-									alt: attributes.authorName || '',
+									alt: attributes.imageAlt || attributes.authorName || '',
 								} )
 								: el( MediaUploadCheck, null,
 									el( MediaUpload, {
@@ -188,6 +191,14 @@
 							checked: attributes.reversed,
 							onChange: function( value ) {
 								setAttributes( { reversed: value } );
+							},
+						} ),
+						attributes.imageUrl && el( TextControl, {
+							label: __( 'Image Alt Text', 'ndt4' ),
+							help: __( 'Describes the image for screen readers. Leave blank to fall back to the author name.', 'ndt4' ),
+							value: attributes.imageAlt,
+							onChange: function( value ) {
+								setAttributes( { imageAlt: value } );
 							},
 						} ),
 						attributes.imageUrl && el( 'div', { style: { marginTop: '16px' } },

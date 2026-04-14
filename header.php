@@ -140,3 +140,29 @@ if ( $animate ) {
 
 	<!-- Site Content -->
 	<main id="content" class="site-content">
+<?php
+/**
+ * Fires before the main content wrapper opens.
+ *
+ * Theme templates register callbacks here to emit siblings of
+ * `.page-primary` (e.g. `.page-header`). Plugin templates that
+ * call get_header() / get_footer() directly skip this hook and
+ * render into the default `.page-primary` column below.
+ */
+do_action( 'ndt4_before_main_content' );
+
+/**
+ * Filter the class list on the main `.page-primary` wrapper.
+ *
+ * Theme templates add modifiers like `block-center` via this
+ * filter rather than emitting their own `.page-primary` div.
+ * When no `.page-sidebar` is registered, `block-center` is added
+ * automatically so the column doesn't collapse against the grid.
+ */
+$ndt4_primary_modifiers = (string) apply_filters( 'ndt4_page_primary_classes', '' );
+if ( ! ndt4_layout_has_sidebar() && false === strpos( $ndt4_primary_modifiers, 'block-center' ) ) {
+	$ndt4_primary_modifiers = trim( $ndt4_primary_modifiers . ' block-center' );
+}
+$ndt4_primary_classes = trim( 'page-primary ' . $ndt4_primary_modifiers );
+?>
+<div class="<?php echo esc_attr( $ndt4_primary_classes ); ?>">

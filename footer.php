@@ -22,6 +22,16 @@ $instagram = get_theme_mod( 'ndt4_social_instagram', '' );
 $youtube   = get_theme_mod( 'ndt4_social_youtube', '' );
 $linkedin  = get_theme_mod( 'ndt4_social_linkedin', '' );
 ?>
+	</div><!-- .page-primary -->
+<?php
+/**
+ * Fires after the main content wrapper closes.
+ *
+ * Theme templates register callbacks here to emit siblings of
+ * `.page-primary` (e.g. `.page-sidebar`).
+ */
+do_action( 'ndt4_after_main_content' );
+?>
 	</main><!-- .site-content -->
 
 	<!-- Site Footer -->

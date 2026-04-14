@@ -61,6 +61,7 @@
 						} ),
 						el( TextControl, {
 							label: __( 'Link URL', 'ndt4' ),
+							help: __( 'Required. Enter the destination URL for this button.', 'ndt4' ),
 							value: attributes.link,
 							onChange: function( value ) {
 								setAttributes( { link: value } );

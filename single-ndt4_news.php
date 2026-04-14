@@ -6,25 +6,19 @@
  * @since 4.0.0
  */
 
+$nav_style       = ndt4_get_navigation_style();
+$topnav          = ( 'top' === $nav_style );
+$has_nav_sidebar = ! $topnav && has_nav_menu( 'primary' );
+
+ndt4_register_layout( [
+	'page_sidebar' => $has_nav_sidebar ? 'ndt4_render_nav_sidebar' : null,
+] );
+
 get_header();
-?>
 
-<main id="primary" class="site-main">
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		get_template_part( 'template-parts/news/news-single' );
-	endwhile;
-	?>
-</main>
+while ( have_posts() ) :
+	the_post();
+	get_template_part( 'template-parts/news/news-single' );
+endwhile;
 
-<?php
-if ( 'side' === ndt4_get_navigation_style() && has_nav_menu( 'primary' ) ) :
-?>
-	<div class="page-sidebar">
-		<?php get_template_part( 'template-parts/navigation/nav-site' ); ?>
-		<?php dynamic_sidebar( 'sidebar-nav' ); ?>
-	</div>
-<?php
-endif;
 get_footer();

@@ -15,8 +15,11 @@ $author_name  = $attributes['authorName'] ?? '';
 $author_title = $attributes['authorTitle'] ?? '';
 $image_id     = $attributes['imageId'] ?? 0;
 $image_url    = $attributes['imageUrl'] ?? '';
+$image_alt    = $attributes['imageAlt'] ?? '';
 $variant      = $attributes['variant'] ?? 'inline';
 $reversed     = $attributes['reversed'] ?? false;
+
+$alt_text = $image_alt !== '' ? $image_alt : $author_name;
 
 if ( ! $quote ) {
 	return;
@@ -34,12 +37,12 @@ if ( $reversed ) {
 // Get image HTML if we have an image.
 $image_html = '';
 if ( $image_id ) {
-	$image_html = wp_get_attachment_image( $image_id, array( 600, 600 ), false, array( 'alt' => esc_attr( $author_name ) ) );
+	$image_html = wp_get_attachment_image( $image_id, array( 600, 600 ), false, array( 'alt' => $alt_text ) );
 } elseif ( $image_url ) {
 	$image_html = sprintf(
 		'<img src="%s" alt="%s">',
 		esc_url( $image_url ),
-		esc_attr( $author_name )
+		esc_attr( $alt_text )
 	);
 }
 
@@ -54,7 +57,7 @@ $avatar_class = 'stacked' === $variant ? 'avatar avatar--sm avatar--quote' : 'av
 			<div class="byline">
 				<?php if ( $image_html ) : ?>
 					<figure class="<?php echo esc_attr( $avatar_class ); ?>">
-						<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() escapes its output; manual <img> above escapes url and alt. ?>
 					</figure>
 				<?php endif; ?>
 				<div class="byline-body">
@@ -73,7 +76,7 @@ $avatar_class = 'stacked' === $variant ? 'avatar avatar--sm avatar--quote' : 'av
 		<div class="flex-md align-start">
 			<?php if ( $image_html ) : ?>
 				<figure class="<?php echo esc_attr( $avatar_class ); ?>">
-					<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() escapes its output; manual <img> above escapes url and alt. ?>
 				</figure>
 			<?php endif; ?>
 			<p><?php echo wp_kses_post( $quote ); ?></p>
