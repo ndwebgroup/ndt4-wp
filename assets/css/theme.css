@@ -68,6 +68,15 @@
 }
 
 /* ==========================================================================
+   Re-apply NDT4 theme-specific styles
+   ========================================================================== */
+@media only screen and (min-width: 60em) {
+	.page-header--container:has(.page-image) .page-image:not(.page-image--tiled) {
+		margin-inline: -3vw;
+	}
+}
+
+/* ==========================================================================
    Single-post article wrapper
    ==========================================================================
    single.php wraps .page-header, .page-primary, .page-secondary, and
