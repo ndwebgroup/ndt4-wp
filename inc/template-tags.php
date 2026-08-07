@@ -27,12 +27,15 @@ if ( ! function_exists( 'ndt4_register_layout' ) ) :
 	 * } $args Layout arguments.
 	 */
 	function ndt4_register_layout( array $args ): void {
+		// accepted_args must be 0: do_action() with no args still passes a single
+		// empty string, which would override optional params on named callbacks
+		// (e.g. ndt4_render_nav_sidebar()'s $nav_part).
 		if ( ! empty( $args['page_header'] ) && is_callable( $args['page_header'] ) ) {
-			add_action( 'ndt4_before_main_content', $args['page_header'] );
+			add_action( 'ndt4_before_main_content', $args['page_header'], 10, 0 );
 		}
 
 		if ( ! empty( $args['page_sidebar'] ) && is_callable( $args['page_sidebar'] ) ) {
-			add_action( 'ndt4_after_main_content', $args['page_sidebar'] );
+			add_action( 'ndt4_after_main_content', $args['page_sidebar'], 10, 0 );
 		}
 
 		if ( ! empty( $args['primary_classes'] ) ) {

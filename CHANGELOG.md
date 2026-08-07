@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.0.4] 2026-08-07
+
+- FIX: Side navigation now renders in the sidebar on the Posts page, archives, search results, and 404. `do_action()` with no arguments passes an empty string to callbacks, which overrode `ndt4_render_nav_sidebar()`'s `$nav_part` default on templates registering it by name; layout hooks now register with `accepted_args = 0`
+- REMOVE: Unused `template-parts/navigation/nav-side.php`, which contained a duplicate `NDT4_Side_Nav_Walker` definition that would fatal if the file were ever loaded
+
+## [1.0.3] 2026-07-14
+
+- FIX: Add .page-image style to theme.css to prevent WordPress base styles from breaking margin on container-sized feature images
+
 ## [1.0.2] - 2026-04-14
 
 - NEW: Single post template now emits schema-rich `NewsArticle` markup — outer `<article typeof="NewsArticle">` spans header/primary/footer/sidebar, with `property="headline"`, `datePublished`, author, `image`, `dateModified`, publisher, `mainEntityOfPage`, and a `.page-secondary.article-footer` share block between `.page-primary` and `.page-sidebar`
