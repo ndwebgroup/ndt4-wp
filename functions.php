@@ -235,15 +235,6 @@ function ndt4_scripts(): void {
 		true
 	);
 
-	// Navigation JS
-	wp_enqueue_script(
-		'ndt4-navigation',
-		get_template_directory_uri() . '/assets/js/navigation.js',
-		[],
-		NDT4_VERSION,
-		true
-	);
-
 	// Localize script with theme data
 	wp_localize_script( 'ndt4-theme', 'ndt4Data', [
 		'navStyle' => ndt4_get_navigation_style(),
