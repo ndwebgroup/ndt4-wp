@@ -218,6 +218,13 @@ function ndt4_scripts(): void {
 		true
 	);
 
+	// Conductor host for the framework's cookie handling; must be defined before ndt.js loads
+	wp_add_inline_script(
+		'ndt-framework',
+		"window.NDTConductorHost='https://conductor.nd.edu';",
+		'before'
+	);
+
 	// Theme JS
 	wp_enqueue_script(
 		'ndt4-theme',
