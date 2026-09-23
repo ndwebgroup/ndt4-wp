@@ -11,7 +11,7 @@ $topnav          = ( 'top' === $nav_style );
 $is_top_level    = ! wp_get_post_parent_id( get_the_ID() );
 $has_children    = ndt4_page_has_children( get_the_ID() );
 $has_subnav      = ! $is_top_level || $has_children;
-$has_nav_sidebar = ! $topnav || $has_subnav;
+$has_nav_sidebar = $topnav ? $has_subnav : has_nav_menu( 'primary' );
 
 ndt4_register_layout( [
 	'page_header' => static function () use ( $is_top_level ): void {

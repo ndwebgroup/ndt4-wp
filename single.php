@@ -9,6 +9,7 @@
 $nav_style           = ndt4_get_navigation_style();
 $topnav              = ( 'top' === $nav_style );
 $show_nav_in_sidebar = ! $topnav && has_nav_menu( 'primary' );
+$has_sidebar         = $show_nav_in_sidebar || is_active_sidebar( 'sidebar-nav' );
 
 /*
  * The outer <article typeof="NewsArticle"> spans the entire post layout
@@ -16,7 +17,9 @@ $show_nav_in_sidebar = ! $topnav && has_nav_menu( 'primary' );
  * callback before the .page-header markup, close it in the page_sidebar
  * callback after the .page-sidebar markup. The page_sidebar callback
  * also emits the .page-secondary article-footer with social share
- * between .page-primary and .page-sidebar.
+ * between .page-primary and .page-sidebar. The callback always runs to
+ * close the article, so `has_sidebar` tells the layout whether the
+ * .page-sidebar is actually output.
  *
  * `article-content entry-content` are added to .page-primary via the
  * classes filter, and `property="mainEntityOfPage"` via primary_attrs,
@@ -58,7 +61,7 @@ ndt4_register_layout( [
 			</header>
 		<?php
 	},
-	'page_sidebar'    => static function () use ( $show_nav_in_sidebar ): void {
+	'page_sidebar'    => static function () use ( $show_nav_in_sidebar, $has_sidebar ): void {
 		?>
 			<footer class="page-secondary article-footer">
 				<div class="meta-share-group">
@@ -66,17 +69,20 @@ ndt4_register_layout( [
 				</div>
 			</footer>
 
-			<div class="page-sidebar">
-				<?php
-				if ( $show_nav_in_sidebar ) {
-					get_template_part( 'template-parts/navigation/nav-site' );
-				}
-				dynamic_sidebar( 'sidebar-nav' );
-				?>
-			</div>
+			<?php if ( $has_sidebar ) : ?>
+				<div class="page-sidebar">
+					<?php
+					if ( $show_nav_in_sidebar ) {
+						get_template_part( 'template-parts/navigation/nav-site' );
+					}
+					dynamic_sidebar( 'sidebar-nav' );
+					?>
+				</div>
+			<?php endif; ?>
 		</article>
 		<?php
 	},
+	'has_sidebar'     => $has_sidebar,
 	'primary_classes' => 'article-content entry-content',
 	'primary_attrs'   => [ 'property' => 'mainEntityOfPage' ],
 ] );

@@ -14,6 +14,16 @@ $show_tagline	= get_theme_mod( 'ndt4_show_tagline', true );
 $mark_right	= ( 'right' === get_theme_mod( 'ndt4_mark_position', 'left' ) );
 $animate = get_theme_mod( 'ndt4_animate', false );
 
+// Skip-to-navigation target: top nav in the header, or side nav in the sidebar
+$skip_nav_target = '';
+if ( has_nav_menu( 'primary' ) ) {
+	if ( $topnav ) {
+		$skip_nav_target = '#nav-primary';
+	} elseif ( ndt4_layout_has_sidebar() ) {
+		$skip_nav_target = '#nav';
+	}
+}
+
 // Build body classes
 $body_classes = ['global-nav-false'];
 if ( $topnav ) {
@@ -44,7 +54,9 @@ if ( $animate ) {
 <nav class="skip-links" aria-label="<?php esc_attr_e( 'Skip links', 'ndt4' ); ?>">
 	<ul>
 		<li><a href="#content" accesskey="C" title="<?php esc_attr_e( 'Skip to content = C', 'ndt4' ); ?>"><?php esc_html_e( 'Skip to content', 'ndt4' ); ?></a></li>
-		<li><a href="#nav<?php echo $topnav ? '-primary' : ''; ?>" accesskey="S" title="<?php esc_attr_e( 'Skip to navigation = S', 'ndt4' ); ?>"><?php esc_html_e( 'Skip to navigation', 'ndt4' ); ?></a></li>
+		<?php if ( $skip_nav_target ) : ?>
+			<li><a href="<?php echo esc_attr( $skip_nav_target ); ?>" accesskey="S" title="<?php esc_attr_e( 'Skip to navigation = S', 'ndt4' ); ?>"><?php esc_html_e( 'Skip to navigation', 'ndt4' ); ?></a></li>
+		<?php endif; ?>
 	</ul>
 </nav>
 
