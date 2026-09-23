@@ -21,6 +21,8 @@ $twitter   = get_theme_mod( 'ndt4_social_twitter', '' );
 $instagram = get_theme_mod( 'ndt4_social_instagram', '' );
 $youtube   = get_theme_mod( 'ndt4_social_youtube', '' );
 $linkedin  = get_theme_mod( 'ndt4_social_linkedin', '' );
+
+$show_back_to_top = get_theme_mod( 'ndt4_back_to_top', false );
 ?>
 	</div><!-- .page-primary -->
 <?php
@@ -54,7 +56,7 @@ do_action( 'ndt4_after_main_content' );
 				<p class="contact-info">
 					<span class="address" property="address" typeof="PostalAddress">
 						<?php if ( $address ) : ?>
-							<span property="streetAddress"><?php echo esc_html( $address ); ?></span><br>
+							<span property="streetAddress"><?php echo nl2br( esc_html( $address ) ); ?></span><br>
 						<?php endif; ?>
 						<span property="addressLocality">Notre Dame</span>, <span property="addressRegion">IN</span> <span property="postalCode">46556</span> <span property="addressCountry">USA</span>
 					</span>
@@ -143,6 +145,15 @@ do_action( 'ndt4_after_main_content' );
 			</p>
 		</div>
 	</footer>
+
+	<?php if ( $show_back_to_top ) : ?>
+		<a href="#header" class="back-to-top">
+			<span class="screen-reader-text"><?php esc_html_e( 'Back to top', 'ndt4' ); ?></span>
+			<svg class="icon" aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24">
+				<path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+			</svg>
+		</a>
+	<?php endif; ?>
 </div><!-- .wrapper -->
 
 <?php get_template_part( 'template-parts/navigation/global-menu' ); ?>

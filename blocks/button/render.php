@@ -15,7 +15,7 @@ $link  = $attributes['link'] ?? '';
 $style = $attributes['style'] ?? 'base';
 $color = $attributes['color'] ?? 'primary';
 
-if ( ! $text ) {
+if ( ! $text || ! $link ) {
 	return;
 }
 

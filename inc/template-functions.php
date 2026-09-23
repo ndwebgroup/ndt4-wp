@@ -127,14 +127,14 @@ function ndt4_schema_org_footer(): void {
 	$schema = [
 		'@context' => 'https://schema.org',
 		'@type'	=> 'Organization',
-		'name'	 => get_bloginfo( 'name' ),
+		'name'	 => html_entity_decode( get_bloginfo( 'name' ), ENT_QUOTES, 'UTF-8' ),
 		'url'	  => home_url( '/' ),
 	];
 
 	if ( $address ) {
 		$schema['address'] = [
 			'@type'		   => 'PostalAddress',
-			'streetAddress'   => wp_strip_all_tags( $address ),
+			'streetAddress'   => preg_replace( '/\s*\R\s*/', ', ', trim( wp_strip_all_tags( $address ) ) ),
 		];
 	}
 
@@ -235,8 +235,9 @@ function ndt4_page_has_children( int $page_id ): bool {
 
 /**
  * Strip the false-positive `current_page_parent` class WordPress adds
- * to the assigned "Posts page" menu item on every non-`post` archive
- * or single (CPT singles, CPT archives, CPT taxonomy archives).
+ * to the assigned "Posts page" menu item on every non-page query that
+ * isn't about posts (CPT singles, CPT archives, CPT taxonomy archives,
+ * search results, 404).
  *
  * Hooks `wp_nav_menu_objects` (not `nav_menu_css_class`) so the
  * cleaned classes are visible to the walker's active-state check,
@@ -252,11 +253,13 @@ function ndt4_strip_posts_page_parent_class( array $items ): array {
 		return $items;
 	}
 
-	$on_cpt_view = ( is_singular() && ! is_singular( 'post' ) && ! is_page() )
+	$non_post_view = ( is_singular() && ! is_singular( 'post' ) && ! is_page() )
 		|| ( is_post_type_archive() && ! is_post_type_archive( 'post' ) )
-		|| is_tax();
+		|| is_tax()
+		|| is_search()
+		|| is_404();
 
-	if ( ! $on_cpt_view ) {
+	if ( ! $non_post_view ) {
 		return $items;
 	}
 
@@ -418,15 +421,15 @@ class NDT4_Top_Nav_Walker extends Walker_Nav_Menu {
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
-		// Check if this is the Home item
-		$is_home = ( 'Home' === $title || 'home' === strtolower( $title ) );
+		// Home item: links to the site root, whatever its (possibly translated) title
+		$is_home = ! empty( $item->url ) && untrailingslashit( $item->url ) === untrailingslashit( home_url( '/' ) );
 
 		$item_output  = $args->before ?? '';
 		$item_output .= '<a' . $attributes;
 
 		if ( $is_home && $this->use_home_icon ) {
-			$item_output .= ' aria-label="Home">';
-			$item_output .= '<svg class="icon" data-icon="home" width="16" height="16"><use xlink:href="#icon-home"></use></svg>';
+			$item_output .= ' aria-label="' . esc_attr( wp_strip_all_tags( $title ) ) . '">';
+			$item_output .= '<svg class="icon" data-icon="home" width="16" height="16" aria-hidden="true" focusable="false"><use xlink:href="#icon-home"></use></svg>';
 		} else {
 			$item_output .= '>';
 			$item_output .= ( $args->link_before ?? '' ) . $title . ( $args->link_after ?? '' );
@@ -493,8 +496,11 @@ class NDT4_Side_Nav_Walker extends Walker_Nav_Menu {
 		$class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-		$id_attr = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
-		$id_attr = $id_attr ? ' id="' . esc_attr( $id_attr ) . '"' : '';
+		$id_attr = '';
+		if ( ! isset( $args->item_ids ) || $args->item_ids ) {
+			$id_attr = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
+			$id_attr = $id_attr ? ' id="' . esc_attr( $id_attr ) . '"' : '';
+		}
 
 		$output .= $indent . '<li' . $id_attr . $class_names . '>';
 

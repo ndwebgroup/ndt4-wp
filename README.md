@@ -5,7 +5,7 @@ A WordPress theme for the University of Notre Dame, featuring a hybrid architect
 ## Requirements
 
 - PHP 8.0 or higher
-- WordPress 6.4 or higher
+- WordPress 6.6 or higher
 
 ## Installation
 
@@ -46,9 +46,7 @@ The theme supports two navigation styles, configured in **Customize → Navigati
 - Facebook, Twitter/X, Instagram, YouTube, LinkedIn URLs
 
 #### Content Options (Customize → Content)
-- Show images in news lists
-- Show back-to-top button
-- Default social share image
+- Show back-to-top button (off by default)
 
 ### Custom Blocks
 
@@ -59,13 +57,9 @@ The theme includes custom blocks available in the block editor under the **NDT4*
 | **Card** | Content card with image, label, title, and summary. Variants: default, horizontal, stacked, featured |
 | **Card Grid (2-Up)** | Two-column grid of cards |
 | **Card Grid (3-Up)** | Three-column grid of cards |
-| **Button** | Styled button link with style options (base, CTA, more) and colors |
+| **Button** | Styled button link with style options (base, CTA, more) and colors. Inserted inside a Button List |
 | **Button List** | Grouped list of buttons |
 | **Blockquote** | Styled quote with attribution and optional avatar. Variants: inline, stacked |
-
-### News
-
-The theme includes a News custom post type accessible at `/news/`. News items support categories via the News Category taxonomy.
 
 ### Page Features
 
@@ -123,7 +117,7 @@ ndt4-wp/
 ├── header.php / footer.php # Site header and footer
 ├── page.php                # Page template with sidebar logic
 ├── single.php              # Single post template
-├── inc/                    # PHP includes (customizer, helpers, CPTs)
+├── inc/                    # PHP includes (customizer, helpers)
 ├── template-parts/         # Reusable template partials
 ├── blocks/                 # Custom block definitions
 ├── patterns/               # Block patterns
@@ -151,7 +145,10 @@ add_action('init', function(): void {
 
 The theme provides these for customization:
 
-- `ndt4_body_classes` — Modify body classes
+- `ndt4_before_main_content` / `ndt4_after_main_content` (actions) — Output siblings before and after `.page-primary`, such as `.page-header` and `.page-sidebar`. Templates usually register these through `ndt4_register_layout()`
+- `ndt4_page_primary_classes` (filter) — Extra classes for `.page-primary`
+- `ndt4_page_primary_attrs` (filter) — Extra attributes for `.page-primary`
+- `ndt4_layout_has_sidebar` (filter) — Whether the current request renders a `.page-sidebar`
 - Standard WordPress hooks for menus, customizer, etc.
 
 ### Local Development

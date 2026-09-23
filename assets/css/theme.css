@@ -180,6 +180,13 @@ a:where(:not(.wp-element-button)) {
 	margin-left: calc(50% - 50vw);
 }
 
+/* 100vw includes the vertical scrollbar; clip the few extra pixels instead of
+   letting full-width blocks cause horizontal page scroll. `clip` (unlike
+   `hidden`) doesn't create a scroll container, so position: sticky still works. */
+body {
+	overflow-x: clip;
+}
+
 /* Captions */
 .wp-caption {
 	max-width: 100%;
@@ -392,6 +399,39 @@ a:where(:not(.wp-element-button)) {
 @media screen and (min-width: 783px) {
 	.admin-bar .skip-links a:focus {
 		top: 37px;
+	}
+}
+
+/* ==========================================================================
+   Back to Top
+   ========================================================================== */
+
+.back-to-top {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 50%;
+	background-color: var(--wp--preset--color--nd-blue, #0c2340);
+	color: #fff;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.back-to-top.is-visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.back-to-top {
+		transition: none;
 	}
 }
 

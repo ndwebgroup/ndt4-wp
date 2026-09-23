@@ -49,7 +49,7 @@ if ( ! in_array( $heading_tag, $allowed_tags, true ) ) {
 ?>
 <div class="card-container">
 	<div class="<?php echo esc_attr( $card_classes ); ?>">
-		<?php if ( $show_image && $image_id ) : ?>
+		<?php if ( ( $is_featured || $show_image ) && $image_id ) : ?>
 			<figure class="card-image">
 				<?php echo wp_get_attachment_image( $image_id, 'large', false, [ 'loading' => 'lazy' ] ); ?>
 			</figure>
@@ -58,13 +58,15 @@ if ( ! in_array( $heading_tag, $allowed_tags, true ) ) {
 			<?php if ( $label ) : ?>
 				<p class="card-label"><?php if ( $is_featured ) : ?><span><?php echo esc_html( $label ); ?></span><?php else : ?><?php echo esc_html( $label ); ?><?php endif; ?></p>
 			<?php endif; ?>
-			<<?php echo esc_attr( $heading_tag ); ?> class="card-title">
-				<?php if ( $link ) : ?>
-					<a class="card-link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a>
-				<?php else : ?>
-					<?php echo esc_html( $title ); ?>
-				<?php endif; ?>
-			</<?php echo esc_attr( $heading_tag ); ?>>
+			<?php if ( $title ) : ?>
+				<<?php echo esc_attr( $heading_tag ); ?> class="card-title">
+					<?php if ( $link ) : ?>
+						<a class="card-link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $title ); ?></a>
+					<?php else : ?>
+						<?php echo esc_html( $title ); ?>
+					<?php endif; ?>
+				</<?php echo esc_attr( $heading_tag ); ?>>
+			<?php endif; ?>
 			<?php if ( ! $is_featured && $summary ) : ?>
 				<p class="card-summary"><?php echo esc_html( $summary ); ?></p>
 			<?php endif; ?>

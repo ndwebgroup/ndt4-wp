@@ -26,14 +26,14 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 			[
 				'selector'		=> '.site-title a',
 				'render_callback' => function() {
-					bloginfo( 'name' );
+					echo esc_html( str_replace( 'Notre Dame ', '', get_bloginfo( 'name' ) ) );
 				},
 			]
 		);
 		$wp_customize->selective_refresh->add_partial(
 			'blogdescription',
 			[
-				'selector'		=> '.site-description',
+				'selector'		=> '.site-tagline',
 				'render_callback' => function() {
 					bloginfo( 'description' );
 				},
@@ -98,7 +98,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 	$wp_customize->add_setting(
 		'ndt4_use_home_icon',
 		[
-			'default'		   => false,
+			'default'		   => true,
 			'sanitize_callback' => 'ndt4_sanitize_checkbox',
 			'transport'		 => 'refresh',
 		]
@@ -110,7 +110,6 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 			'label'   => __( 'Use Home Icon in Navigation', 'ndt4' ),
 			'section' => 'ndt4_navigation',
 			'type'	=> 'checkbox',
-			'default' => true,
 		]
 	);
 
@@ -173,7 +172,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => true,
 			'sanitize_callback' => 'ndt4_sanitize_checkbox',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -203,7 +202,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -222,7 +221,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'esc_url_raw',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -241,7 +240,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -260,7 +259,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'esc_url_raw',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -289,8 +288,8 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		'ndt4_address',
 		[
 			'default'		   => '',
-			'sanitize_callback' => 'wp_kses_post',
-			'transport'		 => 'postMessage',
+			'sanitize_callback' => 'sanitize_textarea_field',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -309,7 +308,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -328,7 +327,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'sanitize_text_field',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -347,7 +346,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		[
 			'default'		   => '',
 			'sanitize_callback' => 'sanitize_email',
-			'transport'		 => 'postMessage',
+			'transport'		 => 'refresh',
 		]
 	);
 
@@ -385,7 +384,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 			[
 				'default'		   => '',
 				'sanitize_callback' => 'esc_url_raw',
-				'transport'		 => 'postMessage',
+				'transport'		 => 'refresh',
 			]
 		);
 
@@ -414,7 +413,7 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 	$wp_customize->add_setting(
 		'ndt4_back_to_top',
 		[
-			'default'		   => true,
+			'default'		   => false,
 			'sanitize_callback' => 'ndt4_sanitize_checkbox',
 			'transport'		 => 'refresh',
 		]
@@ -427,28 +426,6 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 			'section' => 'ndt4_content',
 			'type'	=> 'checkbox',
 		]
-	);
-
-	// Default OG Image.
-	$wp_customize->add_setting(
-		'ndt4_og_image',
-		[
-			'default'		   => '',
-			'sanitize_callback' => 'esc_url_raw',
-			'transport'		 => 'refresh',
-		]
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Image_Control(
-			$wp_customize,
-			'ndt4_og_image',
-			[
-				'label'	   => __( 'Default Social Share Image', 'ndt4' ),
-				'description' => __( 'Used when a page/post does not have a featured image. Recommended size: 1200x630 pixels.', 'ndt4' ),
-				'section'	 => 'ndt4_content',
-			]
-		)
 	);
 }
 add_action( 'customize_register', 'ndt4_customize_register' );
@@ -466,10 +443,10 @@ function ndt4_sanitize_checkbox( $checked ): bool {
 /**
  * Sanitize navigation style
  *
- * @param string $input Navigation style input.
+ * @param mixed $input Navigation style input.
  * @return string
  */
-function ndt4_sanitize_nav_style( string $input ): string {
+function ndt4_sanitize_nav_style( $input ): string {
 	$valid = [ 'side', 'top' ];
 	return in_array( $input, $valid, true ) ? $input : 'side';
 }
@@ -477,10 +454,10 @@ function ndt4_sanitize_nav_style( string $input ): string {
 /**
  * Sanitize header background
  *
- * @param string $input Header background input.
+ * @param mixed $input Header background input.
  * @return string
  */
-function ndt4_sanitize_header_bg( string $input ): string {
+function ndt4_sanitize_header_bg( $input ): string {
 	$valid = [ 'campus', 'clover', 'dome', 'vine-wall', 'custom' ];
 	return in_array( $input, $valid, true ) ? $input : 'dome';
 }
@@ -488,10 +465,10 @@ function ndt4_sanitize_header_bg( string $input ): string {
 /**
  * Sanitize mark position
  *
- * @param string $input Mark position input.
+ * @param mixed $input Mark position input.
  * @return string
  */
-function ndt4_sanitize_mark_position( string $input ): string {
+function ndt4_sanitize_mark_position( $input ): string {
 	$valid = [ 'left', 'right' ];
 	return in_array( $input, $valid, true ) ? $input : 'left';
 }

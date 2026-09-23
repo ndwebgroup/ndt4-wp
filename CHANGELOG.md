@@ -1,5 +1,37 @@
 # Change Log
 
+## [1.0.5] 2026-09-23
+
+- NEW: Define `window.NDTConductorHost` before `ndt.js` loads, for Conductor's cookie handling
+- NEW: Back to Top button is output in the footer when enabled in **Customize → Content Options** (now off by default)
+- NEW: `ndt4_register_layout()` accepts `has_sidebar`, and `ndt4_layout_has_sidebar()` is filterable
+- FIX: Button List block now saves its inner Button blocks; previously they were lost on save and nothing rendered on the front end
+- FIX: Card block shows the image on the Featured variant to match the editor, skips an empty title, and no longer shows a stray "0" in the Image panel
+- FIX: Button block no longer renders with an empty `href`, and can only be inserted inside a Button List
+- FIX: Customizer live preview for the site title and tagline; settings whose markup is omitted when empty (tagline toggle, footer, contact, social) now refresh the preview
+- FIX: Home icon setting defaults to on, matching what the header already rendered
+- FIX: Address is saved as plain text and keeps its line breaks in the footer and JSON-LD
+- FIX: Top-nav section subnav no longer nests child pages inside an unclosed `<li>`
+- FIX: Duplicate menu and menu item IDs from the global-menu copy of the side nav
+- FIX: Posts page menu item is no longer highlighted on search results and 404 pages
+- FIX: Single posts and pages no longer render an empty `.page-sidebar`
+- FIX: X and Email share buttons pointed to icons that don't exist
+- FIX: `ndt4_entry_footer()` left its `<ul>` unclosed
+- FIX: Breadcrumbs showed a literal `<span>` on custom post type and custom taxonomy archives
+- FIX: Skip-to-navigation link is only output when its target exists
+- FIX: Sidebar search form submitted to `/search/` instead of the site root
+- FIX: Global-menu dialog has an accessible name; dialog and search form strings are translatable
+- FIX: Smooth scroll works with IDs that start with a digit (e.g. footnotes) and is no longer cancelled by focus
+- FIX: Full-width blocks no longer cause horizontal scroll when the scrollbar takes up space
+- FIX: `NDT4_VERSION` reads the parent theme's version, so assets are cache-busted under a child theme
+- FIX: Editor sidebar script no longer loads in the block widgets editor
+- FIX: JSON-LD organization name no longer contains HTML entities
+- FIX: Top-nav Home item is detected by URL instead of the title "Home"
+- FIX: Default widgets no longer overwrite existing widget instances on theme activation
+- CHANGE: Requires WordPress 6.6, matching theme.json version 3
+- REMOVE: Default Social Share Image Customizer setting, which was never used
+- REMOVE: Unused templates and template parts (`sidebar.php`, `template-parts/content/*`, `template-parts/header/*`, `template-parts/footer/*`, `nav-mobile.php`, `nav-global-menu.php`) and `assets/js/navigation.js`, which targeted markup the theme doesn't render
+
 ## [1.0.4] 2026-08-07
 
 - FIX: Side navigation now renders in the sidebar on the Posts page, archives, search results, and 404. `do_action()` with no arguments passes an empty string to callbacks, which overrode `ndt4_render_nav_sidebar()`'s `$nav_part` default on templates registering it by name; layout hooks now register with `accepted_args = 0`

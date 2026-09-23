@@ -137,7 +137,7 @@
 							},
 						} )
 					),
-					attributes.imageId && el( Button, {
+					!! attributes.imageId && el( Button, {
 						onClick: onRemoveImage,
 						variant: 'link',
 						isDestructive: true,

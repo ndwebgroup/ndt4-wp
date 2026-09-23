@@ -12,45 +12,9 @@
 	 * Initialize theme functionality
 	 */
 	function init() {
-		initSearchToggle();
 		initBackToTop();
 		initSmoothScroll();
 		initExternalLinks();
-	}
-
-	/**
-	 * Search toggle functionality
-	 */
-	function initSearchToggle() {
-		const searchToggle = document.querySelector('.search-toggle');
-		const siteSearch = document.getElementById('site-search');
-
-		if (!searchToggle || !siteSearch) {
-			return;
-		}
-
-		searchToggle.addEventListener('click', function() {
-			const isExpanded = this.getAttribute('aria-expanded') === 'true';
-
-			this.setAttribute('aria-expanded', !isExpanded);
-			siteSearch.hidden = isExpanded;
-
-			if (!isExpanded) {
-				const searchInput = siteSearch.querySelector('.search-field');
-				if (searchInput) {
-					searchInput.focus();
-				}
-			}
-		});
-
-		// Close search on Escape key
-		document.addEventListener('keydown', function(e) {
-			if (e.key === 'Escape' && !siteSearch.hidden) {
-				searchToggle.setAttribute('aria-expanded', 'false');
-				siteSearch.hidden = true;
-				searchToggle.focus();
-			}
-		});
 	}
 
 	/**
@@ -100,7 +64,7 @@
 					return;
 				}
 
-				const target = document.querySelector(targetId);
+				const target = document.getElementById(decodeURIComponent(targetId.slice(1)));
 
 				if (target) {
 					e.preventDefault();
@@ -111,8 +75,10 @@
 					});
 
 					// Update focus for accessibility
-					target.setAttribute('tabindex', '-1');
-					target.focus();
+					if (!target.hasAttribute('tabindex')) {
+						target.setAttribute('tabindex', '-1');
+					}
+					target.focus({ preventScroll: true });
 				}
 			});
 		});

@@ -13,9 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Theme version constant (pulled from style.css Version header)
+ * Theme version constant (pulled from this theme's style.css Version header,
+ * not the active child theme's, since it busts caches on parent assets)
  */
-define( 'NDT4_VERSION', wp_get_theme()->get( 'Version' ) );
+define( 'NDT4_VERSION', wp_get_theme( get_template() )->get( 'Version' ) );
 
 /**
  * Theme setup
@@ -108,40 +109,40 @@ function ndt4_setup_default_widgets(): void {
 		return;
 	}
 
-	// Set up widget instances
-	// Recent Posts widget
-	$recent_posts = get_option( 'widget_recent-posts', [] );
-	$recent_posts[2] = [
-		'title'  => '',
-		'number' => 5,
+	// Add each widget as a new instance (never reuse an existing number,
+	// which may belong to an inactive widget left by a previous theme)
+	$defaults = [
+		'recent-posts' => [
+			'title'  => '',
+			'number' => 5,
+		],
+		'archives'     => [
+			'title'    => '',
+			'count'    => 0,
+			'dropdown' => 0,
+		],
+		'categories'   => [
+			'title'        => '',
+			'count'        => 0,
+			'hierarchical' => 0,
+			'dropdown'     => 0,
+		],
 	];
-	update_option( 'widget_recent-posts', $recent_posts );
 
-	// Archives widget
-	$archives = get_option( 'widget_archives', [] );
-	$archives[2] = [
-		'title'    => '',
-		'count'    => 0,
-		'dropdown' => 0,
-	];
-	update_option( 'widget_archives', $archives );
+	$widget_ids = [];
+	foreach ( $defaults as $id_base => $settings ) {
+		$instances = get_option( 'widget_' . $id_base, [] );
+		$instances = is_array( $instances ) ? $instances : [];
+		$numbers   = array_filter( array_keys( $instances ), 'is_int' );
+		$number    = max( [ 1, ...$numbers ] ) + 1;
 
-	// Categories widget
-	$categories = get_option( 'widget_categories', [] );
-	$categories[2] = [
-		'title'        => '',
-		'count'        => 0,
-		'hierarchical' => 0,
-		'dropdown'     => 0,
-	];
-	update_option( 'widget_categories', $categories );
+		$instances[ $number ] = $settings;
+		update_option( 'widget_' . $id_base, $instances );
+		$widget_ids[] = $id_base . '-' . $number;
+	}
 
 	// Assign widgets to sidebar
-	$sidebars_widgets['sidebar-nav'] = [
-		'recent-posts-2',
-		'archives-2',
-		'categories-2',
-	];
+	$sidebars_widgets['sidebar-nav'] = $widget_ids;
 	update_option( 'sidebars_widgets', $sidebars_widgets );
 }
 add_action( 'after_switch_theme', 'ndt4_setup_default_widgets' );
@@ -218,20 +219,18 @@ function ndt4_scripts(): void {
 		true
 	);
 
+	// Conductor host for the framework's cookie handling; must be defined before ndt.js loads
+	wp_add_inline_script(
+		'ndt-framework',
+		"window.NDTConductorHost='https://conductor.nd.edu';",
+		'before'
+	);
+
 	// Theme JS
 	wp_enqueue_script(
 		'ndt4-theme',
 		get_template_directory_uri() . '/assets/js/theme.js',
 		[ 'ndt-framework' ],
-		NDT4_VERSION,
-		true
-	);
-
-	// Navigation JS
-	wp_enqueue_script(
-		'ndt4-navigation',
-		get_template_directory_uri() . '/assets/js/navigation.js',
-		[],
 		NDT4_VERSION,
 		true
 	);
@@ -274,6 +273,13 @@ function ndt4_block_editor_assets(): void {
 		[],
 		NDT4_VERSION
 	);
+
+	// The sidebar panel needs wp-edit-post, which must not load in the block-based
+	// widgets editor (Appearance > Widgets, Customizer) that also fires this hook.
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || 'post' !== $screen->base ) {
+		return;
+	}
 
 	$asset_file = get_template_directory() . '/assets/js/editor-sidebar.asset.php';
 	$deps       = file_exists( $asset_file ) ? require $asset_file : [ 'dependencies' => [], 'version' => NDT4_VERSION ];

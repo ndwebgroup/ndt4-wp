@@ -23,8 +23,11 @@ if ( ! function_exists( 'ndt4_register_layout' ) ) :
 	 * @param array{
 	 *     page_header?: callable|null,
 	 *     page_sidebar?: callable|null,
+	 *     has_sidebar?: bool,
 	 *     primary_classes?: string,
-	 * } $args Layout arguments.
+	 * } $args Layout arguments. `has_sidebar` overrides the default
+	 *   (a `page_sidebar` callback is registered) for templates whose
+	 *   callback emits closing markup but may omit the `.page-sidebar`.
 	 */
 	function ndt4_register_layout( array $args ): void {
 		// accepted_args must be 0: do_action() with no args still passes a single
@@ -36,6 +39,16 @@ if ( ! function_exists( 'ndt4_register_layout' ) ) :
 
 		if ( ! empty( $args['page_sidebar'] ) && is_callable( $args['page_sidebar'] ) ) {
 			add_action( 'ndt4_after_main_content', $args['page_sidebar'], 10, 0 );
+		}
+
+		if ( isset( $args['has_sidebar'] ) ) {
+			$has_sidebar = (bool) $args['has_sidebar'];
+			add_filter(
+				'ndt4_layout_has_sidebar',
+				static function () use ( $has_sidebar ): bool {
+					return $has_sidebar;
+				}
+			);
 		}
 
 		if ( ! empty( $args['primary_classes'] ) ) {
@@ -64,12 +77,13 @@ if ( ! function_exists( 'ndt4_layout_has_sidebar' ) ) :
 	/**
 	 * Whether the current request will render a `.page-sidebar`.
 	 *
-	 * True when any callback is attached to `ndt4_after_main_content`.
+	 * True when any callback is attached to `ndt4_after_main_content`,
+	 * unless the template passed `has_sidebar` to ndt4_register_layout().
 	 * Templates register the sidebar callback before get_header() runs,
 	 * so this is reliable from the body_class filter onward.
 	 */
 	function ndt4_layout_has_sidebar(): bool {
-		return (bool) has_action( 'ndt4_after_main_content' );
+		return (bool) apply_filters( 'ndt4_layout_has_sidebar', (bool) has_action( 'ndt4_after_main_content' ) );
 	}
 endif;
 
@@ -140,7 +154,7 @@ if ( ! function_exists( 'ndt4_entry_footer' ) ) :
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
 	function ndt4_entry_footer(): void {
-		echo '<ul class="list--inline">';
+		ob_start();
 
 		if ( 'post' === get_post_type() ) {
 			$categories_list = get_the_category_list( esc_html__( ', ', 'ndt4' ) );
@@ -197,6 +211,11 @@ if ( ! function_exists( 'ndt4_entry_footer' ) ) :
 			'<li class="edit-link">',
 			'</li>'
 		);
+
+		$items = ob_get_clean();
+		if ( $items ) {
+			echo '<ul class="list--inline">' . $items . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- items escaped above.
+		}
 	}
 endif;
 
@@ -296,7 +315,7 @@ if ( ! function_exists( 'ndt4_breadcrumbs' ) ) :
 
 		} elseif ( is_archive() ) {
 			echo '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="current">';
-			echo '<span itemprop="name">' . esc_html( get_the_archive_title() ) . '</span>';
+			echo '<span itemprop="name">' . esc_html( wp_strip_all_tags( get_the_archive_title() ) ) . '</span>';
 			echo '<meta itemprop="position" content="' . esc_attr( $position ) . '" />';
 			echo '</li>';
 
@@ -330,7 +349,7 @@ if ( ! function_exists( 'ndt4_social_share' ) ) :
 			'twitter'  => [
 				'url'   => 'https://twitter.com/intent/tweet?url=' . $url . '&text=' . $title,
 				'label' => __( 'Share on X', 'ndt4' ),
-				'icon'  => 'twitter',
+				'icon'  => 'twitter-x',
 			],
 			'linkedin' => [
 				'url'   => 'https://www.linkedin.com/shareArticle?mini=true&url=' . $url . '&title=' . $title,
@@ -340,7 +359,7 @@ if ( ! function_exists( 'ndt4_social_share' ) ) :
 			'email'	=> [
 				'url'   => 'mailto:?subject=' . $title . '&body=' . $url,
 				'label' => __( 'Share via Email', 'ndt4' ),
-				'icon'  => 'email',
+				'icon'  => 'envelope',
 			],
 		];
 

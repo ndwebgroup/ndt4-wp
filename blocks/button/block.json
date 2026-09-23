@@ -8,6 +8,7 @@
 	"icon": "button",
 	"description": "A button link with style and color options.",
 	"textdomain": "ndt4",
+	"parent": [ "ndt4/button-list" ],
 	"attributes": {
 		"text": {
 			"type": "string",
