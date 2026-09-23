@@ -3,6 +3,7 @@
 	var registerBlockType = wp.blocks.registerBlockType;
 	var useBlockProps = wp.blockEditor.useBlockProps;
 	var useInnerBlocksProps = wp.blockEditor.useInnerBlocksProps;
+	var InnerBlocks = wp.blockEditor.InnerBlocks;
 
 	var TEMPLATE = [
 		[ 'ndt4/button', {} ],
@@ -30,7 +31,7 @@
 		},
 
 		save: function() {
-			return null;
+			return el( InnerBlocks.Content );
 		},
 	} );
 } )( window.wp );
