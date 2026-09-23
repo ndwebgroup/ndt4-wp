@@ -46,9 +46,7 @@ The theme supports two navigation styles, configured in **Customize → Navigati
 - Facebook, Twitter/X, Instagram, YouTube, LinkedIn URLs
 
 #### Content Options (Customize → Content)
-- Show images in news lists
-- Show back-to-top button
-- Default social share image
+- Show back-to-top button (off by default)
 
 ### Custom Blocks
 

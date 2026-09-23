@@ -134,7 +134,7 @@ function ndt4_schema_org_footer(): void {
 	if ( $address ) {
 		$schema['address'] = [
 			'@type'		   => 'PostalAddress',
-			'streetAddress'   => wp_strip_all_tags( $address ),
+			'streetAddress'   => preg_replace( '/\s*\R\s*/', ', ', trim( wp_strip_all_tags( $address ) ) ),
 		];
 	}
 

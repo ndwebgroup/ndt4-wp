@@ -10,7 +10,7 @@ $parent_name	  = get_theme_mod( 'ndt4_parent_org', '' );
 $parent_url	   = get_theme_mod( 'ndt4_parent_url', '' );
 $grandparent_name = get_theme_mod( 'ndt4_grandparent_org', '' );
 $grandparent_url  = get_theme_mod( 'ndt4_grandparent_url', '' );
-$show_back_to_top = get_theme_mod( 'ndt4_back_to_top', true );
+$show_back_to_top = get_theme_mod( 'ndt4_back_to_top', false );
 ?>
 
 <footer id="colophon" class="site-footer">

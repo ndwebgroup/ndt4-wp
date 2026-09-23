@@ -10,7 +10,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 	return;
 }
 
-$use_home_icon = get_theme_mod( 'ndt4_use_home_icon', false );
+$use_home_icon = get_theme_mod( 'ndt4_use_home_icon', true );
 ?>
 
 <nav id="site-navigation" class="main-navigation top-navigation" aria-label="<?php esc_attr_e( 'Primary navigation', 'ndt4' ); ?>">
