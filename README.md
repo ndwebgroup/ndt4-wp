@@ -5,7 +5,7 @@ A WordPress theme for the University of Notre Dame, featuring a hybrid architect
 ## Requirements
 
 - PHP 8.0 or higher
-- WordPress 6.4 or higher
+- WordPress 6.6 or higher
 
 ## Installation
 

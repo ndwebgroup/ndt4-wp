@@ -100,7 +100,7 @@
 					return;
 				}
 
-				const target = document.querySelector(targetId);
+				const target = document.getElementById(decodeURIComponent(targetId.slice(1)));
 
 				if (target) {
 					e.preventDefault();
@@ -111,8 +111,10 @@
 					});
 
 					// Update focus for accessibility
-					target.setAttribute('tabindex', '-1');
-					target.focus();
+					if (!target.hasAttribute('tabindex')) {
+						target.setAttribute('tabindex', '-1');
+					}
+					target.focus({ preventScroll: true });
 				}
 			});
 		});

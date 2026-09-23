@@ -180,6 +180,13 @@ a:where(:not(.wp-element-button)) {
 	margin-left: calc(50% - 50vw);
 }
 
+/* 100vw includes the vertical scrollbar; clip the few extra pixels instead of
+   letting full-width blocks cause horizontal page scroll. `clip` (unlike
+   `hidden`) doesn't create a scroll container, so position: sticky still works. */
+body {
+	overflow-x: clip;
+}
+
 /* Captions */
 .wp-caption {
 	max-width: 100%;

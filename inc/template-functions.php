@@ -127,7 +127,7 @@ function ndt4_schema_org_footer(): void {
 	$schema = [
 		'@context' => 'https://schema.org',
 		'@type'	=> 'Organization',
-		'name'	 => get_bloginfo( 'name' ),
+		'name'	 => html_entity_decode( get_bloginfo( 'name' ), ENT_QUOTES, 'UTF-8' ),
 		'url'	  => home_url( '/' ),
 	];
 
@@ -421,15 +421,15 @@ class NDT4_Top_Nav_Walker extends Walker_Nav_Menu {
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
-		// Check if this is the Home item
-		$is_home = ( 'Home' === $title || 'home' === strtolower( $title ) );
+		// Home item: links to the site root, whatever its (possibly translated) title
+		$is_home = ! empty( $item->url ) && untrailingslashit( $item->url ) === untrailingslashit( home_url( '/' ) );
 
 		$item_output  = $args->before ?? '';
 		$item_output .= '<a' . $attributes;
 
 		if ( $is_home && $this->use_home_icon ) {
-			$item_output .= ' aria-label="Home">';
-			$item_output .= '<svg class="icon" data-icon="home" width="16" height="16"><use xlink:href="#icon-home"></use></svg>';
+			$item_output .= ' aria-label="' . esc_attr( wp_strip_all_tags( $title ) ) . '">';
+			$item_output .= '<svg class="icon" data-icon="home" width="16" height="16" aria-hidden="true" focusable="false"><use xlink:href="#icon-home"></use></svg>';
 		} else {
 			$item_output .= '>';
 			$item_output .= ( $args->link_before ?? '' ) . $title . ( $args->link_after ?? '' );
