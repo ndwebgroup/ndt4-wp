@@ -66,10 +66,8 @@
 		label { display: inline; font-weight: 400; }
 	}
 
-	/* No underline on links outside <main>. Inside it, Conductor decides:
-	   links in text keep the browser's underline, and its nav, card and
-	   button styles remove it. */
-	a:where(:not(.wp-element-button, main a)) {
+	/* No underline on links outside <main>; inside it, Conductor's styles decide. */
+	a:where(:not(main a)) {
 		text-decoration: none;
 	}
 }
