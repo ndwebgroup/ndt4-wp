@@ -56,6 +56,8 @@
 	 * Smooth scroll for anchor links
 	 */
 	function initSmoothScroll() {
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 		document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 			anchor.addEventListener('click', function(e) {
 				const targetId = this.getAttribute('href');
@@ -70,7 +72,7 @@
 					e.preventDefault();
 
 					target.scrollIntoView({
-						behavior: 'smooth',
+						behavior: reduceMotion.matches ? 'auto' : 'smooth',
 						block: 'start'
 					});
 

@@ -187,6 +187,15 @@ body {
 	overflow-x: clip;
 }
 
+/* Conductor scrolls smoothly to in-page targets; jump instead for visitors
+   who ask for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+	html,
+	body {
+		scroll-behavior: auto;
+	}
+}
+
 /* Captions */
 .wp-caption {
 	max-width: 100%;
