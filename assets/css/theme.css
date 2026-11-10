@@ -65,6 +65,13 @@
 	.comment-form-cookies-consent {
 		label { display: inline; font-weight: 400; }
 	}
+
+	/* No underline on links outside <main>. Inside it, Conductor decides:
+	   links in text keep the browser's underline, and its nav, card and
+	   button styles remove it. */
+	a:where(:not(.wp-element-button, main a)) {
+		text-decoration: none;
+	}
 }
 
 /* ==========================================================================
@@ -134,13 +141,6 @@
 	color-scheme: light;
 	color: #333;
 	background-color: #fff;
-}
-
-/* ==========================================================================
-   WordPress Global Styles - Override conflicting defaults
-   ========================================================================== */
-a:where(:not(.wp-element-button)) {
-	text-decoration: none;
 }
 
 /* ==========================================================================
