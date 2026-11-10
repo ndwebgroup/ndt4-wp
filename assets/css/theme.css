@@ -142,6 +142,16 @@
 }
 
 /* ==========================================================================
+   WordPress Global Styles - Override conflicting defaults
+   ==========================================================================
+   WordPress before 7.0 underlines every link in its unlayered global styles,
+   which would beat Conductor's and the site layer's link styles. Cancel it so
+   the layers decide. */
+a:where(:not(.wp-element-button)) {
+	text-decoration: revert-layer;
+}
+
+/* ==========================================================================
    WordPress Core - Required styles for WP features
    ========================================================================== */
 
