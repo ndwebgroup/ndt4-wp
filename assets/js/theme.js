@@ -14,7 +14,6 @@
 	function init() {
 		initBackToTop();
 		initSmoothScroll();
-		initExternalLinks();
 	}
 
 	/**
@@ -83,28 +82,6 @@
 					target.focus({ preventScroll: true });
 				}
 			});
-		});
-	}
-
-	/**
-	 * Add external link indicators and attributes
-	 */
-	function initExternalLinks() {
-		const currentHost = window.location.hostname;
-
-		document.querySelectorAll('a[href^="http"]').forEach(function(link) {
-			const linkHost = new URL(link.href).hostname;
-
-			if (linkHost !== currentHost) {
-				// Add external link attributes
-				if (!link.hasAttribute('target')) {
-					link.setAttribute('target', '_blank');
-				}
-
-				if (!link.hasAttribute('rel')) {
-					link.setAttribute('rel', 'noopener noreferrer');
-				}
-			}
 		});
 	}
 
