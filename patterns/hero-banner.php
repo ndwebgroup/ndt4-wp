@@ -13,8 +13,8 @@
 	<div class="wp-block-cover__inner-container">
 		<!-- wp:group {"layout":{"type":"constrained"}} -->
 		<div class="wp-block-group">
-			<!-- wp:heading {"textAlign":"center","level":1,"textColor":"white"} -->
-			<h1 class="wp-block-heading has-text-align-center has-white-color has-text-color">Welcome to Our Site</h1>
+			<!-- wp:heading {"textAlign":"center","className":"h1","textColor":"white"} -->
+			<h2 class="wp-block-heading h1 has-text-align-center has-white-color has-text-color">Welcome to Our Site</h2>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph {"align":"center","textColor":"white","fontSize":"large"} -->
