@@ -65,6 +65,11 @@
 	.comment-form-cookies-consent {
 		label { display: inline; font-weight: 400; }
 	}
+
+	/* No underline on links outside <main>; inside it, Conductor's styles decide. */
+	a:where(:not(main a)) {
+		text-decoration: none;
+	}
 }
 
 /* ==========================================================================
@@ -138,9 +143,12 @@
 
 /* ==========================================================================
    WordPress Global Styles - Override conflicting defaults
-   ========================================================================== */
+   ==========================================================================
+   WordPress before 7.0 underlines every link in its unlayered global styles,
+   which would beat Conductor's and the site layer's link styles. Cancel it so
+   the layers decide. */
 a:where(:not(.wp-element-button)) {
-	text-decoration: none;
+	text-decoration: revert-layer;
 }
 
 /* ==========================================================================
