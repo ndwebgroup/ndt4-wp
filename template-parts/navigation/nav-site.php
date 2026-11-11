@@ -21,8 +21,6 @@ $nav_class  = $args['nav_class'] ?? 'nav-site nav-full';
 $nav_id     = $args['nav_id'] ?? 'nav';
 $menu_id    = $args['menu_id'] ?? 'nav-site-menu';
 $item_ids   = $args['item_ids'] ?? true;
-$mark_right = ( 'right' === get_theme_mod( 'ndt4_mark_position', 'left' ) );
-$topnav     = ( 'top' === ndt4_get_navigation_style() );
 ?>
 
 <nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>" aria-label="<?php esc_attr_e( 'Primary', 'ndt4' ); ?>">
@@ -37,12 +35,3 @@ $topnav     = ( 'top' === ndt4_get_navigation_style() );
 	] );
 	?>
 </nav>
-
-<?php if ( $mark_right && ! $topnav ) : ?>
-	<form method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search-form" role="search" aria-label="<?php esc_attr_e( 'Site search', 'ndt4' ); ?>">
-		<input type="search" name="s" class="search-input" placeholder="<?php esc_attr_e( 'Search this site', 'ndt4' ); ?>" title="<?php esc_attr_e( 'type your search term', 'ndt4' ); ?>" aria-label="<?php esc_attr_e( 'Site Search input', 'ndt4' ); ?>">
-		<button type="submit" class="btn search-button btn--action" aria-label="<?php esc_attr_e( 'Search', 'ndt4' ); ?>">
-			<svg class="icon" width="16" height="16" data-icon="search"><use xlink:href="#icon-search"></use></svg>
-		</button>
-	</form>
-<?php endif; ?>

@@ -33,7 +33,6 @@ The theme supports two navigation styles, configured in **Customize → Navigati
 #### Header (Customize → Site Identity)
 - Site title and tagline
 - Show/hide tagline
-- Logo mark position (left or right)
 
 #### Footer (Customize → Footer)
 - Parent organization name and URL

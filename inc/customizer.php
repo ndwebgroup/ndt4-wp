@@ -75,25 +75,6 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 		]
 	);
 
-	// Global Nav Toggle.
-	$wp_customize->add_setting(
-		'ndt4_global_nav',
-		[
-			'default'		   => true,
-			'sanitize_callback' => 'ndt4_sanitize_checkbox',
-			'transport'		 => 'refresh',
-		]
-	);
-
-	// $wp_customize->add_control(
-	// 	'ndt4_global_nav',
-	// 	[
-	// 		'label'   => __( 'Show Global Navigation', 'ndt4' ),
-	// 		'section' => 'ndt4_navigation',
-	// 		'type'	=> 'checkbox',
-	// 	]
-	// );
-
 	// Use Home Icon.
 	$wp_customize->add_setting(
 		'ndt4_use_home_icon',
@@ -112,59 +93,6 @@ function ndt4_customize_register( WP_Customize_Manager $wp_customize ): void {
 			'type'	=> 'checkbox',
 		]
 	);
-
-	/*
-	 * Header Section
-	 */
-	$wp_customize->add_section(
-		'ndt4_header',
-		[
-			'title'	=> __( 'Header', 'ndt4' ),
-			'priority' => 35,
-		]
-	);
-
-	// Mark Position.
-	// $wp_customize->add_setting(
-	// 	'ndt4_mark_position',
-	// 	[
-	// 		'default'		   => 'left',
-	// 		'sanitize_callback' => 'ndt4_sanitize_mark_position',
-	// 		'transport'		 => 'refresh',
-	// 	]
-	// );
-
-	// $wp_customize->add_control(
-	// 	'ndt4_mark_position',
-	// 	[
-	// 		'label'   => __( 'ND Mark Position', 'ndt4' ),
-	// 		'section' => 'ndt4_header',
-	// 		'type'	=> 'radio',
-	// 		'choices' => [
-	// 			'left'  => __( 'Left', 'ndt4' ),
-	// 			'right' => __( 'Right', 'ndt4' ),
-	// 		],
-	// 	]
-	// );
-
-	// Animate Header.
-	// $wp_customize->add_setting(
-	// 	'ndt4_animate',
-	// 	[
-	// 		'default'		   => false,
-	// 		'sanitize_callback' => 'ndt4_sanitize_checkbox',
-	// 		'transport'		 => 'refresh',
-	// 	]
-	// );
-
-	// $wp_customize->add_control(
-	// 	'ndt4_animate',
-	// 	[
-	// 		'label'   => __( 'Animate Header', 'ndt4' ),
-	// 		'section' => 'ndt4_header',
-	// 		'type'	=> 'checkbox',
-	// 	]
-	// );
 
 	// Show Tagline.
 	$wp_customize->add_setting(
@@ -449,28 +377,6 @@ function ndt4_sanitize_checkbox( $checked ): bool {
 function ndt4_sanitize_nav_style( $input ): string {
 	$valid = [ 'side', 'top' ];
 	return in_array( $input, $valid, true ) ? $input : 'side';
-}
-
-/**
- * Sanitize header background
- *
- * @param mixed $input Header background input.
- * @return string
- */
-function ndt4_sanitize_header_bg( $input ): string {
-	$valid = [ 'campus', 'clover', 'dome', 'vine-wall', 'custom' ];
-	return in_array( $input, $valid, true ) ? $input : 'dome';
-}
-
-/**
- * Sanitize mark position
- *
- * @param mixed $input Mark position input.
- * @return string
- */
-function ndt4_sanitize_mark_position( $input ): string {
-	$valid = [ 'left', 'right' ];
-	return in_array( $input, $valid, true ) ? $input : 'left';
 }
 
 /**
