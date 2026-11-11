@@ -16,8 +16,8 @@
 	<div class="wp-block-columns alignwide">
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}},"backgroundColor":"white"} -->
-			<div class="wp-block-group has-border-color has-white-background-color has-background" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
+			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}}} -->
+			<div class="wp-block-group has-border-color" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
 				<!-- wp:image {"sizeSlug":"ndt4-card","linkDestination":"none"} -->
 				<figure class="wp-block-image size-ndt4-card"><img src="https://picsum.photos/400/300" alt=""/></figure>
 				<!-- /wp:image -->
@@ -44,8 +44,8 @@
 
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}},"backgroundColor":"white"} -->
-			<div class="wp-block-group has-border-color has-white-background-color has-background" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
+			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}}} -->
+			<div class="wp-block-group has-border-color" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
 				<!-- wp:image {"sizeSlug":"ndt4-card","linkDestination":"none"} -->
 				<figure class="wp-block-image size-ndt4-card"><img src="https://picsum.photos/400/300" alt=""/></figure>
 				<!-- /wp:image -->
@@ -72,8 +72,8 @@
 
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}},"backgroundColor":"white"} -->
-			<div class="wp-block-group has-border-color has-white-background-color has-background" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
+			<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}}} -->
+			<div class="wp-block-group has-border-color" style="border-color:#e4e1d8;border-width:1px;padding-top:0;padding-right:0;padding-bottom:var(--wp--preset--spacing--30);padding-left:0">
 				<!-- wp:image {"sizeSlug":"ndt4-card","linkDestination":"none"} -->
 				<figure class="wp-block-image size-ndt4-card"><img src="https://picsum.photos/400/300" alt=""/></figure>
 				<!-- /wp:image -->
