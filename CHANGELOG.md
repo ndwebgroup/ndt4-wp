@@ -1,5 +1,9 @@
 # Change Log
 
+## [Unreleased]
+
+- FIX: Contact Block pattern headings start at `h2` instead of `h3`, so they follow the page title in order; Conductor's `.h3` and `.h4` classes keep their look
+
 ## [1.0.5] 2026-09-23
 
 - NEW: Define `window.NDTConductorHost` before `ndt.js` loads, for Conductor's cookie handling
