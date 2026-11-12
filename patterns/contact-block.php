@@ -6,8 +6,8 @@
  * Description: Contact information block with address, phone, and email.
  */
 ?>
-<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"var:preset|spacing|40","right":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40"}}},"backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-border-color has-white-background-color has-background" style="border-color:#e4e1d8;border-width:1px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+<!-- wp:group {"style":{"border":{"width":"1px","color":"#e4e1d8"},"spacing":{"padding":{"top":"var:preset|spacing|40","right":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-border-color" style="border-color:#e4e1d8;border-width:1px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
 	<!-- wp:heading {"level":3} -->
 	<h3 class="wp-block-heading">Contact Us</h3>
 	<!-- /wp:heading -->
