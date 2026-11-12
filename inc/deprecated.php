@@ -4,7 +4,8 @@
  *
  * The theme no longer calls these. They are kept for one release so child
  * themes that still call them get a deprecation notice instead of a fatal
- * error, and will be removed in a later version.
+ * error. Delete this file, and its require in functions.php, in the first
+ * release after 1.0.6.
  *
  * @package NDT4
  */
@@ -109,5 +110,39 @@ if ( ! function_exists( 'ndt4_get_child_pages' ) ) :
 		] );
 
 		return $children ?: [];
+	}
+endif;
+
+if ( ! function_exists( 'ndt4_sanitize_header_bg' ) ) :
+	/**
+	 * Sanitize header background
+	 *
+	 * @deprecated 1.0.6
+	 *
+	 * @param mixed $input Header background input.
+	 * @return string
+	 */
+	function ndt4_sanitize_header_bg( $input ): string {
+		_deprecated_function( __FUNCTION__, '1.0.6' );
+
+		$valid = [ 'campus', 'clover', 'dome', 'vine-wall', 'custom' ];
+		return in_array( $input, $valid, true ) ? $input : 'dome';
+	}
+endif;
+
+if ( ! function_exists( 'ndt4_sanitize_mark_position' ) ) :
+	/**
+	 * Sanitize mark position
+	 *
+	 * @deprecated 1.0.6
+	 *
+	 * @param mixed $input Mark position input.
+	 * @return string
+	 */
+	function ndt4_sanitize_mark_position( $input ): string {
+		_deprecated_function( __FUNCTION__, '1.0.6' );
+
+		$valid = [ 'left', 'right' ];
+		return in_array( $input, $valid, true ) ? $input : 'left';
 	}
 endif;
