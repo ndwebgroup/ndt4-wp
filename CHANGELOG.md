@@ -2,8 +2,13 @@
 
 ## [Unreleased]
 
+- FIX: Clicking an in-page link jumps to the target instead of smooth scrolling when the visitor asks for reduced motion
+- FIX: Links in page content are underlined again. Links outside `<main>` stay without an underline, and the link underline that WordPress before 7.0 adds to every link is cancelled so the theme and Conductor styles decide
+- FIX: Card Grid and Contact Block patterns no longer set a white background, so newly inserted patterns follow the page background in dark mode
+- FIX: Hero Banner pattern no longer adds a second `h1` to the page; its heading is an `h2` with Conductor's `.h1` class, which the editor now sizes like an `h1`
+- CHANGE: Off-site links no longer open in a new tab; `theme.js` no longer adds `target="_blank"` and `rel="noopener noreferrer"` to them
 - DEPRECATE: `ndt4_posted_by()`, `ndt4_post_thumbnail()`, `ndt4_has_parent()` and `ndt4_get_child_pages()` are no longer used by the theme. They still work but log a deprecation notice, and will be removed in a later release
-- REMOVE: `ndt4_sanitize_header_bg()` and `ndt4_sanitize_mark_position()`, sanitizers for Customizer settings that were never registered
+- DEPRECATE: `ndt4_sanitize_header_bg()` and `ndt4_sanitize_mark_position()`, sanitizers for Customizer settings that were never registered. They still work but log a deprecation notice, and will be removed in a later release
 - REMOVE: Unregistered `ndt4_global_nav`, `ndt4_mark_position` and `ndt4_animate` Customizer settings, the empty Header section, and the header and side-nav markup that read them (`header-group--logo`, `animate--header`, the side-nav search form)
 - REMOVE: `rel="noopener"` on footer links that don't open a new tab
 
