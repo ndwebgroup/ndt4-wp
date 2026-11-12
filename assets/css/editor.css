@@ -47,12 +47,12 @@
 }
 
 .editor-styles-wrapper .h4 {
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: inherit;
 	margin-bottom: 1.33em;
 }
 
 .editor-styles-wrapper h4,
+.editor-styles-wrapper .h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
