@@ -1,5 +1,9 @@
 # Change Log
 
+## [Unreleased]
+
+- FIX: In-page links (e.g. a table of contents) update the address bar, so the section can be shared and the Back button returns to where you were
+
 ## [1.0.5] 2026-09-23
 
 - NEW: Define `window.NDTConductorHost` before `ndt.js` loads, for Conductor's cookie handling
