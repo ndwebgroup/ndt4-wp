@@ -11,8 +11,6 @@ $topnav	= ( 'top' === $nav_style );
 $use_home_icon = get_theme_mod( 'ndt4_use_home_icon', true );
 $site_tagline	= get_bloginfo( 'description' );
 $show_tagline	= get_theme_mod( 'ndt4_show_tagline', true );
-$mark_right	= ( 'right' === get_theme_mod( 'ndt4_mark_position', 'left' ) );
-$animate = get_theme_mod( 'ndt4_animate', false );
 
 // Skip-to-navigation target: top nav in the header, or side nav in the sidebar
 $skip_nav_target = '';
@@ -30,9 +28,6 @@ if ( $topnav ) {
 	$body_classes[] = 'nav-top--true';
 } else {
 	$body_classes[] = 'nav-top--false';
-}
-if ( $animate ) {
-	$body_classes[] = 'animate--header';
 }
 ?>
 <!DOCTYPE html>
@@ -68,7 +63,7 @@ if ( $animate ) {
 			<span class="visually-hidden"><?php esc_html_e( 'University of Notre Dame', 'ndt4' ); ?></span>
 		</a>
 
-		<div class="header-group header-group--inline-xl<?php echo $mark_right ? ' header-group--logo' : ''; ?>">
+		<div class="header-group header-group--inline-xl">
 			<!-- Site Title and Mark -->
 			<div class="header-title">
 				<a class="header-mark" href="https://www.nd.edu/">

@@ -373,6 +373,7 @@ add_filter( 'post_class', 'ndt4_post_classes' );
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/deprecated.php';
 require get_template_directory() . '/inc/update-checker.php';
 
 /**

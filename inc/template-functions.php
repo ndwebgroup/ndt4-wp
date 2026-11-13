@@ -165,16 +165,6 @@ function ndt4_schema_org_footer(): void {
 add_action( 'wp_footer', 'ndt4_schema_org_footer' );
 
 /**
- * Check if the page has a parent.
- *
- * @return bool
- */
-function ndt4_has_parent(): bool {
-	global $post;
-	return $post && $post->post_parent > 0;
-}
-
-/**
  * Get top-level parent page ID.
  *
  * @return int|false Parent ID or false.
@@ -193,28 +183,6 @@ function ndt4_get_top_parent_id() {
 	}
 
 	return end( $ancestors );
-}
-
-/**
- * Get child pages of current page or parent.
- *
- * @return array Array of page objects.
- */
-function ndt4_get_child_pages(): array {
-	global $post;
-
-	if ( ! $post ) {
-		return [];
-	}
-
-	$parent_id = ndt4_has_parent() ? $post->post_parent : $post->ID;
-
-	$children = get_pages( [
-		'parent'	  => $parent_id,
-		'sort_column' => 'menu_order, post_title',
-	] );
-
-	return $children ?: [];
 }
 
 /**

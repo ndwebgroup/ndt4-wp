@@ -67,7 +67,7 @@ do_action( 'ndt4_after_main_content' );
 						<span class="footer-fax" property="faxNumber" content="+1 <?php echo esc_attr( $fax ); ?>">Fax <?php echo esc_html( $fax ); ?></span>
 					<?php endif; ?>
 					<?php if ( $email ) : ?>
-						<span class="footer-email" property="email"><a rel="noopener" href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a></span>
+						<span class="footer-email" property="email"><a href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a></span>
 					<?php endif; ?>
 				</p>
 
@@ -75,19 +75,19 @@ do_action( 'ndt4_after_main_content' );
 					<nav class="social" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> <?php esc_attr_e( 'social media navigation', 'ndt4' ); ?>" vocab="">
 						<ul>
 							<?php if ( $facebook ) : ?>
-								<li><a class="soc-facebook" href="<?php echo esc_url( $facebook ); ?>" rel="noopener" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on Facebook"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg> Facebook</a></li>
+								<li><a class="soc-facebook" href="<?php echo esc_url( $facebook ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on Facebook"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg> Facebook</a></li>
 							<?php endif; ?>
 							<?php if ( $twitter ) : ?>
-								<li><a class="soc-twitter" href="<?php echo esc_url( $twitter ); ?>" rel="noopener" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on X/Twitter"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-twitter-x"></use></svg> X/Twitter</a></li>
+								<li><a class="soc-twitter" href="<?php echo esc_url( $twitter ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on X/Twitter"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-twitter-x"></use></svg> X/Twitter</a></li>
 							<?php endif; ?>
 							<?php if ( $instagram ) : ?>
-								<li><a class="soc-instagram" href="<?php echo esc_url( $instagram ); ?>" rel="noopener" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on Instagram"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg> Instagram</a></li>
+								<li><a class="soc-instagram" href="<?php echo esc_url( $instagram ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on Instagram"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg> Instagram</a></li>
 							<?php endif; ?>
 							<?php if ( $youtube ) : ?>
-								<li><a class="soc-youtube" href="<?php echo esc_url( $youtube ); ?>" rel="noopener" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on YouTube"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-youtube"></use></svg> YouTube</a></li>
+								<li><a class="soc-youtube" href="<?php echo esc_url( $youtube ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on YouTube"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-youtube"></use></svg> YouTube</a></li>
 							<?php endif; ?>
 							<?php if ( $linkedin ) : ?>
-								<li><a class="soc-linkedin" href="<?php echo esc_url( $linkedin ); ?>" rel="noopener" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on LinkedIn"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-linkedin"></use></svg> LinkedIn</a></li>
+								<li><a class="soc-linkedin" href="<?php echo esc_url( $linkedin ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> on LinkedIn"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-linkedin"></use></svg> LinkedIn</a></li>
 							<?php endif; ?>
 						</ul>
 					</nav>
@@ -115,11 +115,11 @@ do_action( 'ndt4_after_main_content' );
 				</nav>
 				<nav class="footer-social" aria-label="<?php esc_attr_e( 'Notre Dame social media navigation', 'ndt4' ); ?>" vocab="">
 					<ul>
-						<li><a class="soc-facebook" href="https://www.facebook.com/notredame/" rel="noopener" aria-label="<?php esc_attr_e( 'Notre Dame on Facebook', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg> Facebook</a></li>
-						<li><a class="soc-twitter" href="https://twitter.com/NotreDame/" rel="noopener" aria-label="<?php esc_attr_e( 'Notre Dame on X/Twitter', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-twitter-x"></use></svg> X/Twitter</a></li>
-						<li><a class="soc-instagram" href="https://www.instagram.com/notredame/" rel="noopener" aria-label="<?php esc_attr_e( 'Notre Dame on Instagram', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg> Instagram</a></li>
-						<li><a class="soc-youtube" href="https://www.youtube.com/user/NDdotEDU" rel="noopener" aria-label="<?php esc_attr_e( 'Notre Dame on YouTube', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-youtube"></use></svg> YouTube</a></li>
-						<li><a class="soc-linkedin" href="https://www.linkedin.com/school/university-of-notre-dame/" rel="noopener" aria-label="<?php esc_attr_e( 'Notre Dame on LinkedIn', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-linkedin"></use></svg> LinkedIn</a></li>
+						<li><a class="soc-facebook" href="https://www.facebook.com/notredame/" aria-label="<?php esc_attr_e( 'Notre Dame on Facebook', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg> Facebook</a></li>
+						<li><a class="soc-twitter" href="https://twitter.com/NotreDame/" aria-label="<?php esc_attr_e( 'Notre Dame on X/Twitter', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-twitter-x"></use></svg> X/Twitter</a></li>
+						<li><a class="soc-instagram" href="https://www.instagram.com/notredame/" aria-label="<?php esc_attr_e( 'Notre Dame on Instagram', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg> Instagram</a></li>
+						<li><a class="soc-youtube" href="https://www.youtube.com/user/NDdotEDU" aria-label="<?php esc_attr_e( 'Notre Dame on YouTube', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-youtube"></use></svg> YouTube</a></li>
+						<li><a class="soc-linkedin" href="https://www.linkedin.com/school/university-of-notre-dame/" aria-label="<?php esc_attr_e( 'Notre Dame on LinkedIn', 'ndt4' ); ?>"><svg class="icon" width="16" height="16" aria-hidden="true"><use xlink:href="#icon-linkedin"></use></svg> LinkedIn</a></li>
 					</ul>
 				</nav>
 			</div>

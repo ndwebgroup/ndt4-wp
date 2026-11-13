@@ -48,7 +48,6 @@
 
 /* NDT4 specific sections */
 #accordion-section-ndt4_navigation .accordion-section-title::before,
-#accordion-section-ndt4_header .accordion-section-title::before,
 #accordion-section-ndt4_footer .accordion-section-title::before,
 #accordion-section-ndt4_contact .accordion-section-title::before,
 #accordion-section-ndt4_social .accordion-section-title::before,
@@ -65,7 +64,6 @@
 
 /* Active state */
 #accordion-section-ndt4_navigation.open .accordion-section-title,
-#accordion-section-ndt4_header.open .accordion-section-title,
 #accordion-section-ndt4_footer.open .accordion-section-title,
 #accordion-section-ndt4_contact.open .accordion-section-title,
 #accordion-section-ndt4_social.open .accordion-section-title,
