@@ -25,6 +25,7 @@ if ( ! function_exists( 'ndt4_register_layout' ) ) :
 	 *     page_sidebar?: callable|null,
 	 *     has_sidebar?: bool,
 	 *     primary_classes?: string,
+	 *     primary_attrs?: array<string,string>,
 	 * } $args Layout arguments. `has_sidebar` overrides the default
 	 *   (a `page_sidebar` callback is registered) for templates whose
 	 *   callback emits closing markup but may omit the `.page-sidebar`.
@@ -320,7 +321,7 @@ if ( ! function_exists( 'ndt4_social_share' ) ) :
 
 		foreach ( $networks as $network => $data ) {
 			echo '<li>';
-			echo '<a href="' . esc_url( $data['url'] ) . '" class="share-link share-' . esc_attr( $network ) . '" target="_blank" rel="noopener noreferrer">';
+			echo '<a href="' . esc_url( $data['url'] ) . '" class="share-link share-' . esc_attr( $network ) . '">';
 			echo '<span class="screen-reader-text">' . esc_html( $data['label'] ) . '</span>';
 			echo '<svg class="icon icon-' . esc_attr( $data['icon'] ) . '" aria-hidden="true" focusable="false">';
 			echo '<use xlink:href="#icon-' . esc_attr( $data['icon'] ) . '"></use>';
