@@ -134,21 +134,6 @@ if ( ! function_exists( 'ndt4_posted_on' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'ndt4_posted_by' ) ) :
-	/**
-	 * Prints HTML with meta information for the current author.
-	 */
-	function ndt4_posted_by(): void {
-		$byline = sprintf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'ndt4' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-		);
-
-		echo '<span class="article--byline meta-item author"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-endif;
-
 if ( ! function_exists( 'ndt4_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
@@ -216,40 +201,6 @@ if ( ! function_exists( 'ndt4_entry_footer' ) ) :
 		if ( $items ) {
 			echo '<ul class="list--inline">' . $items . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- items escaped above.
 		}
-	}
-endif;
-
-if ( ! function_exists( 'ndt4_post_thumbnail' ) ) :
-	/**
-	 * Displays an optional post thumbnail.
-	 *
-	 * @param string $size Image size to use.
-	 */
-	function ndt4_post_thumbnail( string $size = 'post-thumbnail' ): void {
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
-			return;
-		}
-
-		if ( is_singular() ) :
-			?>
-			<div class="post-thumbnail">
-				<?php the_post_thumbnail( $size ); ?>
-			</div>
-			<?php
-		else :
-			?>
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-				<?php
-				the_post_thumbnail(
-					$size,
-					[
-						'alt' => the_title_attribute( [ 'echo' => false ] ),
-					]
-				);
-				?>
-			</a>
-			<?php
-		endif;
 	}
 endif;
 
