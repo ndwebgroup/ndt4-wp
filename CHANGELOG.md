@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- FIX: Newly inserted Contact Block patterns start their headings at `h2` instead of `h3`, so they follow the page title in order; Conductor's `.h3` and `.h4` classes keep their look
 - FIX: In-page links (e.g. a table of contents) update the address bar, so the section can be shared and the Back button returns to where you were
 
 ## [1.0.5] 2026-09-23
