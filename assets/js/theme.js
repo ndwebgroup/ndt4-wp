@@ -13,7 +13,7 @@
 	 */
 	function init() {
 		initBackToTop();
-		initSmoothScroll();
+		initInPageLinks();
 	}
 
 	/**
@@ -52,30 +52,19 @@
 	}
 
 	/**
-	 * Smooth scroll for anchor links
+	 * Move focus to the target of in-page links
+	 *
+	 * The browser follows the link: it updates the URL hash and history, and
+	 * scrolls (smoothly via Conductor's CSS, or instantly under reduced motion
+	 * via theme.css).
 	 */
-	function initSmoothScroll() {
-		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
+	function initInPageLinks() {
 		document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-			anchor.addEventListener('click', function(e) {
+			anchor.addEventListener('click', function() {
 				const targetId = this.getAttribute('href');
-
-				if (targetId === '#') {
-					return;
-				}
-
 				const target = document.getElementById(decodeURIComponent(targetId.slice(1)));
 
 				if (target) {
-					e.preventDefault();
-
-					target.scrollIntoView({
-						behavior: reduceMotion.matches ? 'auto' : 'smooth',
-						block: 'start'
-					});
-
-					// Update focus for accessibility
 					if (!target.hasAttribute('tabindex')) {
 						target.setAttribute('tabindex', '-1');
 					}
