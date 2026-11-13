@@ -36,12 +36,23 @@
 	color: #0c2340;
 }
 
-/* Conductor's .h1 class: a lower heading level at h1 size */
+/* Conductor's .h1, .h3 and .h4 classes: one heading level styled as another */
 .editor-styles-wrapper .h1 {
 	font-size: 2em;
 }
 
+.editor-styles-wrapper .h3 {
+	font-size: 1.17em;
+	margin-block: 1em;
+}
+
+.editor-styles-wrapper .h4 {
+	color: inherit;
+	margin-bottom: 1.33em;
+}
+
 .editor-styles-wrapper h4,
+.editor-styles-wrapper .h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
