@@ -1,5 +1,5 @@
 ( function( wp ) {
-	var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
+	var PluginDocumentSettingPanel = wp.editor.PluginDocumentSettingPanel;
 	var TextareaControl = wp.components.TextareaControl;
 	var useSelect = wp.data.useSelect;
 	var useDispatch = wp.data.useDispatch;
