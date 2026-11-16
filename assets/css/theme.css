@@ -204,9 +204,8 @@ body {
 	}
 }
 
-/* Captions: color comes from Conductor's figcaption style, which follows
-   light and dark mode. `revert-layer` also cancels the fixed gray in
-   WordPress's own block styles, which are unlayered. */
+/* Captions: `revert-layer` hands color to Conductor's light/dark figcaption
+   style, past WordPress's unlayered block-style gray. */
 .wp-caption {
 	max-width: 100%;
 	margin-bottom: 1rem;
