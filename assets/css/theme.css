@@ -204,7 +204,8 @@ body {
 	}
 }
 
-/* Captions */
+/* Captions: color comes from Conductor's figcaption style, which follows
+   light and dark mode. */
 .wp-caption {
 	max-width: 100%;
 	margin-bottom: 1rem;
@@ -218,7 +219,6 @@ body {
 
 .wp-caption-text {
 	font-size: 0.875rem;
-	color: #666;
 	padding-top: 0.5rem;
 }
 
@@ -354,7 +354,6 @@ body {
 /* Image block */
 .wp-block-image figcaption {
 	font-size: 0.875rem;
-	color: #666;
 	margin-top: 0.5rem;
 }
 
