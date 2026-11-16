@@ -288,7 +288,7 @@ function ndt4_block_editor_assets(): void {
 		'ndt4-editor-sidebar',
 		get_template_directory_uri() . '/assets/js/editor-sidebar.js',
 		array_merge(
-			[ 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-data', 'wp-core-data', 'wp-i18n' ],
+			[ 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-data', 'wp-i18n' ],
 			$deps['dependencies'] ?? []
 		),
 		$deps['version'] ?? NDT4_VERSION,
