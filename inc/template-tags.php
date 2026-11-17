@@ -290,7 +290,8 @@ if ( ! function_exists( 'ndt4_social_share' ) ) :
 	 */
 	function ndt4_social_share(): void {
 		$url   = rawurlencode( get_permalink() );
-		$title = rawurlencode( get_the_title() );
+		// Share text is plain text: no texturized entities or markup from the title.
+		$title = rawurlencode( html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES, 'UTF-8' ) );
 
 		$networks = [
 			'facebook' => [
