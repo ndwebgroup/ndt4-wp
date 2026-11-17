@@ -118,7 +118,7 @@ if ( ! function_exists( 'ndt4_plain_title' ) ) :
 	 * @return string Title without markup, with entities decoded.
 	 */
 	function ndt4_plain_title(): string {
-		return html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES, 'UTF-8' );
+		return html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	}
 endif;
 
