@@ -107,6 +107,21 @@ if ( ! function_exists( 'ndt4_render_nav_sidebar' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'ndt4_plain_title' ) ) :
+	/**
+	 * Get the current post's title as the plain text a visitor sees.
+	 *
+	 * get_the_title() returns HTML: texturized entities such as &#8217; and any
+	 * markup in the title. Share links and the page title's data-length, which
+	 * Conductor's ndt.css sizes the heading from, need the text itself.
+	 *
+	 * @return string Title without markup, with entities decoded.
+	 */
+	function ndt4_plain_title(): string {
+		return html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+	}
+endif;
+
 if ( ! function_exists( 'ndt4_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
@@ -290,8 +305,7 @@ if ( ! function_exists( 'ndt4_social_share' ) ) :
 	 */
 	function ndt4_social_share(): void {
 		$url   = rawurlencode( get_permalink() );
-		// Share text is plain text: no texturized entities or markup from the title.
-		$title = rawurlencode( html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES, 'UTF-8' ) );
+		$title = rawurlencode( ndt4_plain_title() );
 
 		$networks = [
 			'facebook' => [

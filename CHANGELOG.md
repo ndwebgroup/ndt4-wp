@@ -11,6 +11,7 @@
 - FIX: Image captions are readable in dark mode; they now use Conductor's caption color instead of a fixed gray
 - FIX: The Page Lede panel no longer logs a deprecation warning in the block editor; it uses `wp.editor.PluginDocumentSettingPanel` (WordPress 6.6+) instead of `wp.editPost`
 - FIX: Share links shown without Conductor's `ndt.js` use the post title as plain text, so X, LinkedIn and email no longer show HTML entities such as `&#8217;` for apostrophes and quotes
+- FIX: Page titles with apostrophes, quotes, dashes, `&` or accented letters are no longer drawn smaller than other titles of the same length; the title's `data-length`, which Conductor uses to size it, now counts the characters visitors see instead of the bytes of the title's HTML
 - CHANGE: Off-site links no longer open in a new tab
 - CHANGE: Share links no longer open in a new tab when Conductor's `ndt.js` doesn't load
 - DEPRECATE: `ndt4_posted_by()`, `ndt4_post_thumbnail()`, `ndt4_has_parent()` and `ndt4_get_child_pages()`, which the theme no longer uses, and `ndt4_sanitize_header_bg()` and `ndt4_sanitize_mark_position()`, sanitizers for Customizer settings that were never registered. They still work but log a deprecation notice, and will be removed in a later release

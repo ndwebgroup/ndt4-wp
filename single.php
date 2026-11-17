@@ -32,7 +32,7 @@ ndt4_register_layout( [
 			<header class="article-header page-header">
 				<div class="page-title-wrapper">
 					<?php ndt4_breadcrumbs(); ?>
-					<h1 property="headline" class="page-title entry-title" data-length="<?php echo esc_attr( (string) strlen( get_the_title() ) ); ?>"><?php the_title(); ?></h1>
+					<h1 property="headline" class="page-title entry-title" data-length="<?php echo esc_attr( (string) mb_strlen( ndt4_plain_title() ) ); ?>"><?php the_title(); ?></h1>
 
 					<div class="meta-share-group grid grid-md-2">
 						<div class="meta">
