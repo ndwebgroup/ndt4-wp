@@ -15,7 +15,7 @@ ndt4_register_layout( [
 		<div class="page-header<?php echo ( $is_top_level || has_post_thumbnail() ) ? ' page-header--inset' : ''; ?>">
 			<div class="page-title-wrapper">
 				<?php ndt4_breadcrumbs(); ?>
-				<h1 class="page-title" data-length="<?php echo esc_attr( (string) ndt4_title_length() ); ?>"><?php the_title(); ?></h1>
+				<h1 class="page-title" data-length="<?php echo esc_attr( (string) mb_strlen( ndt4_plain_title() ) ); ?>"><?php the_title(); ?></h1>
 				<?php
 				$page_lede = get_post_meta( get_the_ID(), 'ndt4_page_lede', true );
 				if ( $page_lede ) :
