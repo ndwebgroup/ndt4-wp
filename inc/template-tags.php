@@ -107,6 +107,20 @@ if ( ! function_exists( 'ndt4_render_nav_sidebar' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'ndt4_title_length' ) ) :
+	/**
+	 * Count the characters a visitor sees in the current post's title.
+	 *
+	 * Conductor's ndt.css sizes `.page-title[data-length]` from this count, so it
+	 * skips the markup and texturized entities that get_the_title() returns.
+	 *
+	 * @return int Number of characters in the plain-text title.
+	 */
+	function ndt4_title_length(): int {
+		return mb_strlen( html_entity_decode( wp_strip_all_tags( get_the_title() ), ENT_QUOTES, 'UTF-8' ) );
+	}
+endif;
+
 if ( ! function_exists( 'ndt4_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
