@@ -77,7 +77,7 @@ if ( $topnav ) {
 					$title_tag = ( is_front_page() && is_home() ) ? 'h1' : 'p';
 					$title_class = 'site-title';
 					// Count the characters visitors see; WordPress stores the site name HTML-escaped (& as &amp;).
-					if ( mb_strlen( html_entity_decode( $site_name, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) > 40 ) {
+					if ( mb_strlen( html_entity_decode( $site_name, ENT_QUOTES | ENT_HTML5, 'UTF-8' ), 'UTF-8' ) > 40 ) {
 						$title_class .= ' site-title--long';
 					}
 					?>
