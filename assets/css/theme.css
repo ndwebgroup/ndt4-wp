@@ -70,6 +70,13 @@
 	a:where(:not(main a)) {
 		text-decoration: none;
 	}
+
+	/* A title with one long word ("Telecommunications", a long search term)
+	   can't wrap, so it widens the page past a phone's screen. Let it break
+	   inside the word, only when it would otherwise overflow. */
+	.page-title {
+		overflow-wrap: anywhere;
+	}
 }
 
 /* ==========================================================================
